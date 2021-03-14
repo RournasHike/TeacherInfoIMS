@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.TScheduleMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.TSchedule" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="class_year" property="classYear" jdbcType="VARCHAR" />
+    <result column="class_term" property="classTerm" jdbcType="VARCHAR" />
+    <result column="class_work_day" property="classWorkDay" jdbcType="VARCHAR" />
+    <result column="class_num" property="classNum" jdbcType="VARCHAR" />
+    <result column="start_week" property="startWeek" jdbcType="INTEGER" />
+    <result column="class_week" property="classWeek" jdbcType="INTEGER" />
+    <result column="is_single_week" property="isSingleWeek" jdbcType="BIT" />
+    <result column="is_double_week" property="isDoubleWeek" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cid, tid, rid, class_year, class_term, class_work_day, class_num, start_week, 
+    class_week, is_single_week, is_double_week
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TScheduleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_schedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_schedule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_schedule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.TScheduleExample" >
+    delete from t_schedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.TSchedule" >
+    insert into t_schedule (id, cid, tid, 
+      rid, class_year, class_term, 
+      class_work_day, class_num, start_week, 
+      class_week, is_single_week, is_double_week
+      )
+    values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, 
+      #{rid,jdbcType=INTEGER}, #{classYear,jdbcType=VARCHAR}, #{classTerm,jdbcType=VARCHAR}, 
+      #{classWorkDay,jdbcType=VARCHAR}, #{classNum,jdbcType=VARCHAR}, #{startWeek,jdbcType=INTEGER}, 
+      #{classWeek,jdbcType=INTEGER}, #{isSingleWeek,jdbcType=BIT}, #{isDoubleWeek,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TSchedule" >
+    insert into t_schedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="classYear != null" >
+        class_year,
+      </if>
+      <if test="classTerm != null" >
+        class_term,
+      </if>
+      <if test="classWorkDay != null" >
+        class_work_day,
+      </if>
+      <if test="classNum != null" >
+        class_num,
+      </if>
+      <if test="startWeek != null" >
+        start_week,
+      </if>
+      <if test="classWeek != null" >
+        class_week,
+      </if>
+      <if test="isSingleWeek != null" >
+        is_single_week,
+      </if>
+      <if test="isDoubleWeek != null" >
+        is_double_week,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="classYear != null" >
+        #{classYear,jdbcType=VARCHAR},
+      </if>
+      <if test="classTerm != null" >
+        #{classTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="classWorkDay != null" >
+        #{classWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="classNum != null" >
+        #{classNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startWeek != null" >
+        #{startWeek,jdbcType=INTEGER},
+      </if>
+      <if test="classWeek != null" >
+        #{classWeek,jdbcType=INTEGER},
+      </if>
+      <if test="isSingleWeek != null" >
+        #{isSingleWeek,jdbcType=BIT},
+      </if>
+      <if test="isDoubleWeek != null" >
+        #{isDoubleWeek,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.TScheduleExample" resultType="java.lang.Integer" >
+    select count(*) from t_schedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_schedule
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classYear != null" >
+        class_year = #{record.classYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classTerm != null" >
+        class_term = #{record.classTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classWorkDay != null" >
+        class_work_day = #{record.classWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classNum != null" >
+        class_num = #{record.classNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startWeek != null" >
+        start_week = #{record.startWeek,jdbcType=INTEGER},
+      </if>
+      <if test="record.classWeek != null" >
+        class_week = #{record.classWeek,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSingleWeek != null" >
+        is_single_week = #{record.isSingleWeek,jdbcType=BIT},
+      </if>
+      <if test="record.isDoubleWeek != null" >
+        is_double_week = #{record.isDoubleWeek,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_schedule
+    set id = #{record.id,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      rid = #{record.rid,jdbcType=INTEGER},
+      class_year = #{record.classYear,jdbcType=VARCHAR},
+      class_term = #{record.classTerm,jdbcType=VARCHAR},
+      class_work_day = #{record.classWorkDay,jdbcType=VARCHAR},
+      class_num = #{record.classNum,jdbcType=VARCHAR},
+      start_week = #{record.startWeek,jdbcType=INTEGER},
+      class_week = #{record.classWeek,jdbcType=INTEGER},
+      is_single_week = #{record.isSingleWeek,jdbcType=BIT},
+      is_double_week = #{record.isDoubleWeek,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.TSchedule" >
+    update t_schedule
+    <set >
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null" >
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="classYear != null" >
+        class_year = #{classYear,jdbcType=VARCHAR},
+      </if>
+      <if test="classTerm != null" >
+        class_term = #{classTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="classWorkDay != null" >
+        class_work_day = #{classWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="classNum != null" >
+        class_num = #{classNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startWeek != null" >
+        start_week = #{startWeek,jdbcType=INTEGER},
+      </if>
+      <if test="classWeek != null" >
+        class_week = #{classWeek,jdbcType=INTEGER},
+      </if>
+      <if test="isSingleWeek != null" >
+        is_single_week = #{isSingleWeek,jdbcType=BIT},
+      </if>
+      <if test="isDoubleWeek != null" >
+        is_double_week = #{isDoubleWeek,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.TSchedule" >
+    update t_schedule
+    set cid = #{cid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      rid = #{rid,jdbcType=INTEGER},
+      class_year = #{classYear,jdbcType=VARCHAR},
+      class_term = #{classTerm,jdbcType=VARCHAR},
+      class_work_day = #{classWorkDay,jdbcType=VARCHAR},
+      class_num = #{classNum,jdbcType=VARCHAR},
+      start_week = #{startWeek,jdbcType=INTEGER},
+      class_week = #{classWeek,jdbcType=INTEGER},
+      is_single_week = #{isSingleWeek,jdbcType=BIT},
+      is_double_week = #{isDoubleWeek,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

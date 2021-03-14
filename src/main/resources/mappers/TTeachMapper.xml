@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.TTeachMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.TTeach" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="teach_type" property="teachType" jdbcType="VARCHAR" />
+    <result column="teach_class_year" property="teachClassYear" jdbcType="VARCHAR" />
+    <result column="teach_class_term" property="teachClassTerm" jdbcType="VARCHAR" />
+    <result column="teach_grade" property="teachGrade" jdbcType="VARCHAR" />
+    <result column="teach_major" property="teachMajor" jdbcType="VARCHAR" />
+    <result column="prescribed_class_hour" property="prescribedClassHour" jdbcType="INTEGER" />
+    <result column="actual_class_hour" property="actualClassHour" jdbcType="INTEGER" />
+    <result column="actual_teach_class_hour" property="actualTeachClassHour" jdbcType="INTEGER" />
+    <result column="actual_experiment_class_hour" property="actualExperimentClassHour" jdbcType="INTEGER" />
+    <result column="actual_computer_class_hour" property="actualComputerClassHour" jdbcType="INTEGER" />
+    <result column="actual_other_class_hour" property="actualOtherClassHour" jdbcType="INTEGER" />
+    <result column="actual_sumup_class_hour" property="actualSumupClassHour" jdbcType="INTEGER" />
+    <result column="audit_state" property="auditState" jdbcType="BIT" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tid, cid, teach_type, teach_class_year, teach_class_term, teach_grade, teach_major, 
+    prescribed_class_hour, actual_class_hour, actual_teach_class_hour, actual_experiment_class_hour, 
+    actual_computer_class_hour, actual_other_class_hour, actual_sumup_class_hour, audit_state, 
+    message, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TTeachExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_teach
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_teach
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_teach
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.TTeachExample" >
+    delete from t_teach
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.TTeach" >
+    insert into t_teach (id, tid, cid, 
+      teach_type, teach_class_year, teach_class_term, 
+      teach_grade, teach_major, prescribed_class_hour, 
+      actual_class_hour, actual_teach_class_hour, 
+      actual_experiment_class_hour, actual_computer_class_hour, 
+      actual_other_class_hour, actual_sumup_class_hour, 
+      audit_state, message, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{teachType,jdbcType=VARCHAR}, #{teachClassYear,jdbcType=VARCHAR}, #{teachClassTerm,jdbcType=VARCHAR}, 
+      #{teachGrade,jdbcType=VARCHAR}, #{teachMajor,jdbcType=VARCHAR}, #{prescribedClassHour,jdbcType=INTEGER}, 
+      #{actualClassHour,jdbcType=INTEGER}, #{actualTeachClassHour,jdbcType=INTEGER}, 
+      #{actualExperimentClassHour,jdbcType=INTEGER}, #{actualComputerClassHour,jdbcType=INTEGER}, 
+      #{actualOtherClassHour,jdbcType=INTEGER}, #{actualSumupClassHour,jdbcType=INTEGER}, 
+      #{auditState,jdbcType=BIT}, #{message,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TTeach" >
+    insert into t_teach
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="teachType != null" >
+        teach_type,
+      </if>
+      <if test="teachClassYear != null" >
+        teach_class_year,
+      </if>
+      <if test="teachClassTerm != null" >
+        teach_class_term,
+      </if>
+      <if test="teachGrade != null" >
+        teach_grade,
+      </if>
+      <if test="teachMajor != null" >
+        teach_major,
+      </if>
+      <if test="prescribedClassHour != null" >
+        prescribed_class_hour,
+      </if>
+      <if test="actualClassHour != null" >
+        actual_class_hour,
+      </if>
+      <if test="actualTeachClassHour != null" >
+        actual_teach_class_hour,
+      </if>
+      <if test="actualExperimentClassHour != null" >
+        actual_experiment_class_hour,
+      </if>
+      <if test="actualComputerClassHour != null" >
+        actual_computer_class_hour,
+      </if>
+      <if test="actualOtherClassHour != null" >
+        actual_other_class_hour,
+      </if>
+      <if test="actualSumupClassHour != null" >
+        actual_sumup_class_hour,
+      </if>
+      <if test="auditState != null" >
+        audit_state,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="teachType != null" >
+        #{teachType,jdbcType=VARCHAR},
+      </if>
+      <if test="teachClassYear != null" >
+        #{teachClassYear,jdbcType=VARCHAR},
+      </if>
+      <if test="teachClassTerm != null" >
+        #{teachClassTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="teachGrade != null" >
+        #{teachGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="teachMajor != null" >
+        #{teachMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="prescribedClassHour != null" >
+        #{prescribedClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualClassHour != null" >
+        #{actualClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualTeachClassHour != null" >
+        #{actualTeachClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualExperimentClassHour != null" >
+        #{actualExperimentClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualComputerClassHour != null" >
+        #{actualComputerClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualOtherClassHour != null" >
+        #{actualOtherClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualSumupClassHour != null" >
+        #{actualSumupClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        #{auditState,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.TTeachExample" resultType="java.lang.Integer" >
+    select count(*) from t_teach
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_teach
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.teachType != null" >
+        teach_type = #{record.teachType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachClassYear != null" >
+        teach_class_year = #{record.teachClassYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachClassTerm != null" >
+        teach_class_term = #{record.teachClassTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachGrade != null" >
+        teach_grade = #{record.teachGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachMajor != null" >
+        teach_major = #{record.teachMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prescribedClassHour != null" >
+        prescribed_class_hour = #{record.prescribedClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualClassHour != null" >
+        actual_class_hour = #{record.actualClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualTeachClassHour != null" >
+        actual_teach_class_hour = #{record.actualTeachClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualExperimentClassHour != null" >
+        actual_experiment_class_hour = #{record.actualExperimentClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualComputerClassHour != null" >
+        actual_computer_class_hour = #{record.actualComputerClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualOtherClassHour != null" >
+        actual_other_class_hour = #{record.actualOtherClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualSumupClassHour != null" >
+        actual_sumup_class_hour = #{record.actualSumupClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditState != null" >
+        audit_state = #{record.auditState,jdbcType=BIT},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_teach
+    set id = #{record.id,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      teach_type = #{record.teachType,jdbcType=VARCHAR},
+      teach_class_year = #{record.teachClassYear,jdbcType=VARCHAR},
+      teach_class_term = #{record.teachClassTerm,jdbcType=VARCHAR},
+      teach_grade = #{record.teachGrade,jdbcType=VARCHAR},
+      teach_major = #{record.teachMajor,jdbcType=VARCHAR},
+      prescribed_class_hour = #{record.prescribedClassHour,jdbcType=INTEGER},
+      actual_class_hour = #{record.actualClassHour,jdbcType=INTEGER},
+      actual_teach_class_hour = #{record.actualTeachClassHour,jdbcType=INTEGER},
+      actual_experiment_class_hour = #{record.actualExperimentClassHour,jdbcType=INTEGER},
+      actual_computer_class_hour = #{record.actualComputerClassHour,jdbcType=INTEGER},
+      actual_other_class_hour = #{record.actualOtherClassHour,jdbcType=INTEGER},
+      actual_sumup_class_hour = #{record.actualSumupClassHour,jdbcType=INTEGER},
+      audit_state = #{record.auditState,jdbcType=BIT},
+      message = #{record.message,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.TTeach" >
+    update t_teach
+    <set >
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="teachType != null" >
+        teach_type = #{teachType,jdbcType=VARCHAR},
+      </if>
+      <if test="teachClassYear != null" >
+        teach_class_year = #{teachClassYear,jdbcType=VARCHAR},
+      </if>
+      <if test="teachClassTerm != null" >
+        teach_class_term = #{teachClassTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="teachGrade != null" >
+        teach_grade = #{teachGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="teachMajor != null" >
+        teach_major = #{teachMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="prescribedClassHour != null" >
+        prescribed_class_hour = #{prescribedClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualClassHour != null" >
+        actual_class_hour = #{actualClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualTeachClassHour != null" >
+        actual_teach_class_hour = #{actualTeachClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualExperimentClassHour != null" >
+        actual_experiment_class_hour = #{actualExperimentClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualComputerClassHour != null" >
+        actual_computer_class_hour = #{actualComputerClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualOtherClassHour != null" >
+        actual_other_class_hour = #{actualOtherClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualSumupClassHour != null" >
+        actual_sumup_class_hour = #{actualSumupClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        audit_state = #{auditState,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.TTeach" >
+    update t_teach
+    set tid = #{tid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      teach_type = #{teachType,jdbcType=VARCHAR},
+      teach_class_year = #{teachClassYear,jdbcType=VARCHAR},
+      teach_class_term = #{teachClassTerm,jdbcType=VARCHAR},
+      teach_grade = #{teachGrade,jdbcType=VARCHAR},
+      teach_major = #{teachMajor,jdbcType=VARCHAR},
+      prescribed_class_hour = #{prescribedClassHour,jdbcType=INTEGER},
+      actual_class_hour = #{actualClassHour,jdbcType=INTEGER},
+      actual_teach_class_hour = #{actualTeachClassHour,jdbcType=INTEGER},
+      actual_experiment_class_hour = #{actualExperimentClassHour,jdbcType=INTEGER},
+      actual_computer_class_hour = #{actualComputerClassHour,jdbcType=INTEGER},
+      actual_other_class_hour = #{actualOtherClassHour,jdbcType=INTEGER},
+      actual_sumup_class_hour = #{actualSumupClassHour,jdbcType=INTEGER},
+      audit_state = #{auditState,jdbcType=BIT},
+      message = #{message,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

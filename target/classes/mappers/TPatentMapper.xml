@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.TPatentMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.TPatent" >
+    <id column="patid" property="patid" jdbcType="INTEGER" />
+    <result column="patno" property="patno" jdbcType="VARCHAR" />
+    <result column="patname" property="patname" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="participants" property="participants" jdbcType="VARCHAR" />
+    <result column="patsn" property="patsn" jdbcType="VARCHAR" />
+    <result column="patappdate" property="patappdate" jdbcType="DATE" />
+    <result column="patendate" property="patendate" jdbcType="DATE" />
+    <result column="patgrade" property="patgrade" jdbcType="VARCHAR" />
+    <result column="pattype" property="pattype" jdbcType="VARCHAR" />
+    <result column="paccessory" property="paccessory" jdbcType="VARCHAR" />
+    <result column="paudit" property="paudit" jdbcType="BIT" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patid, patno, patname, tid, participants, patsn, patappdate, patendate, patgrade, 
+    pattype, paccessory, paudit, message, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TPatentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_patent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_patent
+    where patid = #{patid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_patent
+    where patid = #{patid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.TPatentExample" >
+    delete from t_patent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.TPatent" >
+    insert into t_patent (patid, patno, patname, 
+      tid, participants, patsn, 
+      patappdate, patendate, patgrade, 
+      pattype, paccessory, paudit, 
+      message, remark)
+    values (#{patid,jdbcType=INTEGER}, #{patno,jdbcType=VARCHAR}, #{patname,jdbcType=VARCHAR}, 
+      #{tid,jdbcType=INTEGER}, #{participants,jdbcType=VARCHAR}, #{patsn,jdbcType=VARCHAR}, 
+      #{patappdate,jdbcType=DATE}, #{patendate,jdbcType=DATE}, #{patgrade,jdbcType=VARCHAR}, 
+      #{pattype,jdbcType=VARCHAR}, #{paccessory,jdbcType=VARCHAR}, #{paudit,jdbcType=BIT}, 
+      #{message,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TPatent" >
+    insert into t_patent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      patid,
+      <if test="patno != null" >
+        patno,
+      </if>
+      <if test="patname != null" >
+        patname,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="participants != null" >
+        participants,
+      </if>
+      <if test="patsn != null" >
+        patsn,
+      </if>
+      <if test="patappdate != null" >
+        patappdate,
+      </if>
+      <if test="patendate != null" >
+        patendate,
+      </if>
+      <if test="patgrade != null" >
+        patgrade,
+      </if>
+      <if test="pattype != null" >
+        pattype,
+      </if>
+      <if test="paccessory != null" >
+        paccessory,
+      </if>
+      <if test="paudit != null" >
+        paudit,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      null,
+      <if test="patno != null" >
+        #{patno,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null" >
+        #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="participants != null" >
+        #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="patsn != null" >
+        #{patsn,jdbcType=VARCHAR},
+      </if>
+      <if test="patappdate != null" >
+        #{patappdate,jdbcType=DATE},
+      </if>
+      <if test="patendate != null" >
+        #{patendate,jdbcType=DATE},
+      </if>
+      <if test="patgrade != null" >
+        #{patgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="pattype != null" >
+        #{pattype,jdbcType=VARCHAR},
+      </if>
+      <if test="paccessory != null" >
+        #{paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="paudit != null" >
+        #{paudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.TPatentExample" resultType="java.lang.Integer" >
+    select count(*) from t_patent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_patent
+    <set >
+      <if test="record.patid != null" >
+        patid = #{record.patid,jdbcType=INTEGER},
+      </if>
+      <if test="record.patno != null" >
+        patno = #{record.patno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patname != null" >
+        patname = #{record.patname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.participants != null" >
+        participants = #{record.participants,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patsn != null" >
+        patsn = #{record.patsn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patappdate != null" >
+        patappdate = #{record.patappdate,jdbcType=DATE},
+      </if>
+      <if test="record.patendate != null" >
+        patendate = #{record.patendate,jdbcType=DATE},
+      </if>
+      <if test="record.patgrade != null" >
+        patgrade = #{record.patgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pattype != null" >
+        pattype = #{record.pattype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paccessory != null" >
+        paccessory = #{record.paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paudit != null" >
+        paudit = #{record.paudit,jdbcType=BIT},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_patent
+    set patid = #{record.patid,jdbcType=INTEGER},
+      patno = #{record.patno,jdbcType=VARCHAR},
+      patname = #{record.patname,jdbcType=VARCHAR},
+      tid = #{record.tid,jdbcType=INTEGER},
+      participants = #{record.participants,jdbcType=VARCHAR},
+      patsn = #{record.patsn,jdbcType=VARCHAR},
+      patappdate = #{record.patappdate,jdbcType=DATE},
+      patendate = #{record.patendate,jdbcType=DATE},
+      patgrade = #{record.patgrade,jdbcType=VARCHAR},
+      pattype = #{record.pattype,jdbcType=VARCHAR},
+      paccessory = #{record.paccessory,jdbcType=VARCHAR},
+      paudit = #{record.paudit,jdbcType=BIT},
+      message = #{record.message,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.TPatent" >
+    update t_patent
+    <set >
+      <if test="patno != null" >
+        patno = #{patno,jdbcType=VARCHAR},
+      </if>
+      <if test="patname != null" >
+        patname = #{patname,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="participants != null" >
+        participants = #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="patsn != null" >
+        patsn = #{patsn,jdbcType=VARCHAR},
+      </if>
+      <if test="patappdate != null" >
+        patappdate = #{patappdate,jdbcType=DATE},
+      </if>
+      <if test="patendate != null" >
+        patendate = #{patendate,jdbcType=DATE},
+      </if>
+      <if test="patgrade != null" >
+        patgrade = #{patgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="pattype != null" >
+        pattype = #{pattype,jdbcType=VARCHAR},
+      </if>
+      <if test="paccessory != null" >
+        paccessory = #{paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="paudit != null" >
+        paudit = #{paudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where patid = #{patid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.TPatent" >
+    update t_patent
+    set patno = #{patno,jdbcType=VARCHAR},
+      patname = #{patname,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      participants = #{participants,jdbcType=VARCHAR},
+      patsn = #{patsn,jdbcType=VARCHAR},
+      patappdate = #{patappdate,jdbcType=DATE},
+      patendate = #{patendate,jdbcType=DATE},
+      patgrade = #{patgrade,jdbcType=VARCHAR},
+      pattype = #{pattype,jdbcType=VARCHAR},
+      paccessory = #{paccessory,jdbcType=VARCHAR},
+      paudit = #{paudit,jdbcType=BIT},
+      message = #{message,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where patid = #{patid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selPatentInfoByUserId" parameterType="int" resultType="com.mytest.teainfoims.vo.TPatent">
+    select p.*,t.teacher_name teacherName from t_user u inner join t_teacher t on u.username=t.teacher_no inner join t_patent p on t.tid=p.tid
+    <where>
+      <if test="uid!=null">
+        uid=#{uid,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selPatentInfoByPatid" parameterType="int" resultType="com.mytest.teainfoims.vo.TPatent">
+    select
+      p.*,teacher_name teacherName
+    from t_patent p inner join t_teacher t on p.tid=t.tid
+    where patid = #{patid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selAuditPatentList" parameterType="com.mytest.teainfoims.query.PatentQuery" resultType="com.mytest.teainfoims.vo.TPatent">
+    select * from t_patent p inner join t_teacher t on p.tid=t.tid
+    <where>
+      <if test="paudit==null">
+        paudit is null
+      </if>
+      <if test="paudit != null">
+        paudit=#{paudit}
+      </if>
+
+      <if test="teacherName != null and teacherName !=''">
+        and teacher_name like concat('%',#{teacherName},'%')
+      </if>
+      <if test="patname != null and patname != ''">
+        and patname like concat('%',#{patname},'%')
+      </if>
+      order by patappdate desc
+    </where>
+  </select>
+</mapper>

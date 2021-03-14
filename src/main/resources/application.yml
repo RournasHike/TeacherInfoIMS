@@ -1,0 +1,88 @@
+## 端口号  上下文路径
+server:
+  port: 8081
+  servlet:
+    context-path: /teainfoims
+## 数据源配置
+spring:
+  datasource:
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/teaimsdb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+  ## freemarker
+  freemarker:
+    suffix: .ftl
+    content-type: text/html
+    charset: UTF-8
+    template-loader-path: classpath:/views/
+
+  ## 启用热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+#配置后端返回的json数据时如果有date类型自动进行格式转换
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+#配置上传文件的大小
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  #配置邮件发送
+  mail:
+    host: smtp.qq.com
+    username: 2057473561@qq.com
+    password: xfzhdhqxezkkcjff
+    default-encoding: UTF-8
+    properties:
+      mail:
+        stmp:
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+## mybatis 配置
+mybatis:
+  mapper-locations: classpath:/mappers/*.xml
+  type-aliases-package: com.mytest.teainfoims.vo;com.mytest.teainfoims.query;com.mytest.teainfoims.dto
+  configuration:
+    map-underscore-to-camel-case: true
+
+## pageHelper 分页
+pagehelper:
+  helper-dialect: mysql
+
+## 设置 dao 日志打印级别
+logging:
+  level:
+    com:
+      mytest:
+        teainfoims:
+          dao: debug
+
+## 设置freemarker
+mvc:
+  static-path-pattern: /static/**
+  freemarker:
+    template-loader-path: classpath:/views/
+    charset: utf-8
+    cache: false
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helper: true
+    suffix: .ftl
+#邮件属性配置
+email:
+  subject: 教研室教师IMS邮件
+  contents: 您好！您已经成功注册高校教研室教师信息管理系统!
+  account: 您的登录账号为
+  password: 您的初试密码为
+  link: 请登录系统修改密码，登录链接为http://localhost:8081/teainfoims/index

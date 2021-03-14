@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.TResearchMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.TResearch" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="research_title" property="researchTitle" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="retype" property="retype" jdbcType="VARCHAR" />
+    <result column="scontent" property="scontent" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="DATE" />
+    <result column="endtime" property="endtime" jdbcType="DATE" />
+    <result column="restate" property="restate" jdbcType="BIT" />
+    <result column="paudit" property="paudit" jdbcType="BIT" />
+    <result column="paccessory" property="paccessory" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, research_title, tid, retype, scontent, starttime, endtime, restate, paudit, paccessory, 
+    message, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TResearchExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_research
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_research
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_research
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.TResearchExample" >
+    delete from t_research
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.TResearch" >
+    insert into t_research (id, research_title, tid, 
+      retype, scontent, starttime, 
+      endtime, restate, paudit, paccessory, 
+      message, remark)
+    values (#{id,jdbcType=INTEGER}, #{researchTitle,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, 
+      #{retype,jdbcType=VARCHAR}, #{scontent,jdbcType=VARCHAR}, #{starttime,jdbcType=DATE}, 
+      #{endtime,jdbcType=DATE}, #{restate,jdbcType=BIT}, #{paudit,jdbcType=BIT}, #{paccessory,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TResearch" >
+    insert into t_research
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="researchTitle != null" >
+        research_title,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="retype != null" >
+        retype,
+      </if>
+      <if test="scontent != null" >
+        scontent,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="restate != null" >
+        restate,
+      </if>
+      <if test="paudit != null" >
+        paudit,
+      </if>
+      <if test="paccessory != null" >
+        paccessory,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="researchTitle != null" >
+        #{researchTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="retype != null" >
+        #{retype,jdbcType=VARCHAR},
+      </if>
+      <if test="scontent != null" >
+        #{scontent,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="restate != null" >
+        #{restate,jdbcType=BIT},
+      </if>
+      <if test="paudit != null" >
+        #{paudit,jdbcType=BIT},
+      </if>
+      <if test="paccessory != null" >
+        #{paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.TResearchExample" resultType="java.lang.Integer" >
+    select count(*) from t_research
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_research
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.researchTitle != null" >
+        research_title = #{record.researchTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.retype != null" >
+        retype = #{record.retype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scontent != null" >
+        scontent = #{record.scontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=DATE},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=DATE},
+      </if>
+      <if test="record.restate != null" >
+        restate = #{record.restate,jdbcType=BIT},
+      </if>
+      <if test="record.paudit != null" >
+        paudit = #{record.paudit,jdbcType=BIT},
+      </if>
+      <if test="record.paccessory != null" >
+        paccessory = #{record.paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_research
+    set id = #{record.id,jdbcType=INTEGER},
+      research_title = #{record.researchTitle,jdbcType=VARCHAR},
+      tid = #{record.tid,jdbcType=INTEGER},
+      retype = #{record.retype,jdbcType=VARCHAR},
+      scontent = #{record.scontent,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=DATE},
+      endtime = #{record.endtime,jdbcType=DATE},
+      restate = #{record.restate,jdbcType=BIT},
+      paudit = #{record.paudit,jdbcType=BIT},
+      paccessory = #{record.paccessory,jdbcType=VARCHAR},
+      message = #{record.message,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.TResearch" >
+    update t_research
+    <set >
+      <if test="researchTitle != null" >
+        research_title = #{researchTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="retype != null" >
+        retype = #{retype,jdbcType=VARCHAR},
+      </if>
+      <if test="scontent != null" >
+        scontent = #{scontent,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="restate != null" >
+        restate = #{restate,jdbcType=BIT},
+      </if>
+      <if test="paudit != null" >
+        paudit = #{paudit,jdbcType=BIT},
+      </if>
+      <if test="paccessory != null" >
+        paccessory = #{paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.TResearch" >
+    update t_research
+    set research_title = #{researchTitle,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      retype = #{retype,jdbcType=VARCHAR},
+      scontent = #{scontent,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=DATE},
+      endtime = #{endtime,jdbcType=DATE},
+      restate = #{restate,jdbcType=BIT},
+      paudit = #{paudit,jdbcType=BIT},
+      paccessory = #{paccessory,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selResearchInfoByUserId" parameterType="int" resultType="com.mytest.teainfoims.vo.TResearch">
+    select r.*,t.teacher_name teacherName from t_user u inner join t_teacher t on u.username=t.teacher_no inner join t_research r on t.tid=r.tid
+    <where>
+      <if test="uid!=null">
+        uid=#{uid,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selResearchInfoById" parameterType="int" resultType="com.mytest.teainfoims.vo.TResearch">
+    select
+      r.*,teacher_name teacherName
+    from t_research r inner join t_teacher t on r.tid=t.tid
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selAuditResearchList" parameterType="com.mytest.teainfoims.query.ResearchQuery" resultType="com.mytest.teainfoims.vo.TResearch">
+    select * from t_research p inner join t_teacher t on p.tid=t.tid
+    <where>
+      <if test="paudit==null">
+        paudit is null
+      </if>
+      <if test="paudit != null">
+        paudit=#{paudit}
+      </if>
+
+      <if test="teacherName != null and teacherName !=''">
+        and teacher_name like concat('%',#{teacherName},'%')
+      </if>
+      <if test="researchTitle != null and researchTitle != ''">
+        and research_title like concat('%',#{researchTitle},'%')
+      </if>
+      order by starttime desc
+    </where>
+  </select>
+</mapper>

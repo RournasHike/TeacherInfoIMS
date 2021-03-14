@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.TCourseMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.TCourse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="course_no" property="courseNo" jdbcType="VARCHAR" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="course_type" property="courseType" jdbcType="VARCHAR" />
+    <result column="week_class_hour" property="weekClassHour" jdbcType="INTEGER" />
+    <result column="teach_class_hour" property="teachClassHour" jdbcType="INTEGER" />
+    <result column="experiment_class_hour" property="experimentClassHour" jdbcType="INTEGER" />
+    <result column="computer_class_hour" property="computerClassHour" jdbcType="INTEGER" />
+    <result column="other_class_hour" property="otherClassHour" jdbcType="INTEGER" />
+    <result column="sumup_class_hour" property="sumupClassHour" jdbcType="INTEGER" />
+    <result column="credit" property="credit" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="BIT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, course_no, course_name, course_type, week_class_hour, teach_class_hour, experiment_class_hour, 
+    computer_class_hour, other_class_hour, sumup_class_hour, credit, state, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TCourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.TCourseExample" >
+    delete from t_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.TCourse" >
+    insert into t_course (id, course_no, course_name, 
+      course_type, week_class_hour, teach_class_hour, 
+      experiment_class_hour, computer_class_hour, 
+      other_class_hour, sumup_class_hour, credit, 
+      state, remark)
+    values (#{id,jdbcType=INTEGER}, #{courseNo,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, 
+      #{courseType,jdbcType=VARCHAR}, #{weekClassHour,jdbcType=INTEGER}, #{teachClassHour,jdbcType=INTEGER}, 
+      #{experimentClassHour,jdbcType=INTEGER}, #{computerClassHour,jdbcType=INTEGER}, 
+      #{otherClassHour,jdbcType=INTEGER}, #{sumupClassHour,jdbcType=INTEGER}, #{credit,jdbcType=DOUBLE}, 
+      #{state,jdbcType=BIT}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TCourse" >
+    insert into t_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseNo != null" >
+        course_no,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="courseType != null" >
+        course_type,
+      </if>
+      <if test="weekClassHour != null" >
+        week_class_hour,
+      </if>
+      <if test="teachClassHour != null" >
+        teach_class_hour,
+      </if>
+      <if test="experimentClassHour != null" >
+        experiment_class_hour,
+      </if>
+      <if test="computerClassHour != null" >
+        computer_class_hour,
+      </if>
+      <if test="otherClassHour != null" >
+        other_class_hour,
+      </if>
+      <if test="sumupClassHour != null" >
+        sumup_class_hour,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseNo != null" >
+        #{courseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseType != null" >
+        #{courseType,jdbcType=VARCHAR},
+      </if>
+      <if test="weekClassHour != null" >
+        #{weekClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="teachClassHour != null" >
+        #{teachClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="experimentClassHour != null" >
+        #{experimentClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="computerClassHour != null" >
+        #{computerClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="otherClassHour != null" >
+        #{otherClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="sumupClassHour != null" >
+        #{sumupClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.TCourseExample" resultType="java.lang.Integer" >
+    select count(*) from t_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_course
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseNo != null" >
+        course_no = #{record.courseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseName != null" >
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseType != null" >
+        course_type = #{record.courseType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weekClassHour != null" >
+        week_class_hour = #{record.weekClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.teachClassHour != null" >
+        teach_class_hour = #{record.teachClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.experimentClassHour != null" >
+        experiment_class_hour = #{record.experimentClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.computerClassHour != null" >
+        computer_class_hour = #{record.computerClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.otherClassHour != null" >
+        other_class_hour = #{record.otherClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.sumupClassHour != null" >
+        sumup_class_hour = #{record.sumupClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.credit != null" >
+        credit = #{record.credit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=BIT},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_course
+    set id = #{record.id,jdbcType=INTEGER},
+      course_no = #{record.courseNo,jdbcType=VARCHAR},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      course_type = #{record.courseType,jdbcType=VARCHAR},
+      week_class_hour = #{record.weekClassHour,jdbcType=INTEGER},
+      teach_class_hour = #{record.teachClassHour,jdbcType=INTEGER},
+      experiment_class_hour = #{record.experimentClassHour,jdbcType=INTEGER},
+      computer_class_hour = #{record.computerClassHour,jdbcType=INTEGER},
+      other_class_hour = #{record.otherClassHour,jdbcType=INTEGER},
+      sumup_class_hour = #{record.sumupClassHour,jdbcType=INTEGER},
+      credit = #{record.credit,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=BIT},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.TCourse" >
+    update t_course
+    <set >
+      <if test="courseNo != null" >
+        course_no = #{courseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseType != null" >
+        course_type = #{courseType,jdbcType=VARCHAR},
+      </if>
+      <if test="weekClassHour != null" >
+        week_class_hour = #{weekClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="teachClassHour != null" >
+        teach_class_hour = #{teachClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="experimentClassHour != null" >
+        experiment_class_hour = #{experimentClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="computerClassHour != null" >
+        computer_class_hour = #{computerClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="otherClassHour != null" >
+        other_class_hour = #{otherClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="sumupClassHour != null" >
+        sumup_class_hour = #{sumupClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.TCourse" >
+    update t_course
+    set course_no = #{courseNo,jdbcType=VARCHAR},
+      course_name = #{courseName,jdbcType=VARCHAR},
+      course_type = #{courseType,jdbcType=VARCHAR},
+      week_class_hour = #{weekClassHour,jdbcType=INTEGER},
+      teach_class_hour = #{teachClassHour,jdbcType=INTEGER},
+      experiment_class_hour = #{experimentClassHour,jdbcType=INTEGER},
+      computer_class_hour = #{computerClassHour,jdbcType=INTEGER},
+      other_class_hour = #{otherClassHour,jdbcType=INTEGER},
+      sumup_class_hour = #{sumupClassHour,jdbcType=INTEGER},
+      credit = #{credit,jdbcType=DOUBLE},
+      state = #{state,jdbcType=BIT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 多条件查询 -->
+  <select id="selCourseList" parameterType="com.mytest.teainfoims.query.base.BaseQuery" resultType="com.mytest.teainfoims.vo.TCourse">
+    select
+    <include refid="Base_Column_List"></include>
+    from
+    t_course
+    <where>
+      state = 1
+    </where>
+  </select>
+</mapper>

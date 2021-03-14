@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.TProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.TProject" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="pno" property="pno" jdbcType="VARCHAR" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="teacherName" property="teacherName" jdbcType="VARCHAR"/>
+    <result column="pgrade" property="pgrade" jdbcType="VARCHAR" />
+    <result column="pkind" property="pkind" jdbcType="VARCHAR" />
+    <result column="pfunds" property="pfunds" jdbcType="DOUBLE" />
+    <result column="participants" property="participants" jdbcType="VARCHAR" />
+    <result column="pstatime" property="pstatime" jdbcType="DATE" />
+    <result column="pendtime" property="pendtime" jdbcType="DATE" />
+    <result column="pcondition" property="pcondition" jdbcType="BIT" />
+    <result column="psource" property="psource" jdbcType="VARCHAR" />
+    <result column="paccessory" property="paccessory" jdbcType="VARCHAR" />
+    <result column="kytype" property="kytype" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="paudit" property="paudit" jdbcType="BIT" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="premark" property="premark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, pno, pname, tid, pgrade, pkind, pfunds, participants, pstatime, pendtime, pcondition, 
+    psource, paccessory, kytype, result, paudit, message, premark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_project
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.TProjectExample" >
+    delete from t_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.TProject" >
+    insert into t_project (pid, pno, pname, 
+      tid, pgrade, pkind, 
+      pfunds, participants, pstatime, 
+      pendtime, pcondition, psource, 
+      paccessory, kytype, result, 
+      paudit, message, premark
+      )
+    values (#{pid,jdbcType=INTEGER}, #{pno,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, 
+      #{tid,jdbcType=INTEGER}, #{pgrade,jdbcType=VARCHAR}, #{pkind,jdbcType=VARCHAR}, 
+      #{pfunds,jdbcType=DOUBLE}, #{participants,jdbcType=VARCHAR}, #{pstatime,jdbcType=DATE}, 
+      #{pendtime,jdbcType=DATE}, #{pcondition,jdbcType=BIT}, #{psource,jdbcType=VARCHAR}, 
+      #{paccessory,jdbcType=VARCHAR}, #{kytype,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
+      #{paudit,jdbcType=BIT}, #{message,jdbcType=VARCHAR}, #{premark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TProject" >
+    insert into t_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      pid,
+      <if test="pno != null" >
+        pno,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="pgrade != null" >
+        pgrade,
+      </if>
+      <if test="pkind != null" >
+        pkind,
+      </if>
+      <if test="pfunds != null" >
+        pfunds,
+      </if>
+      <if test="participants != null" >
+        participants,
+      </if>
+      <if test="pstatime != null" >
+        pstatime,
+      </if>
+      <if test="pendtime != null" >
+        pendtime,
+      </if>
+      <if test="pcondition != null" >
+        pcondition,
+      </if>
+      <if test="psource != null" >
+        psource,
+      </if>
+      <if test="paccessory != null" >
+        paccessory,
+      </if>
+      <if test="kytype != null" >
+        kytype,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="paudit != null" >
+        paudit,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="premark != null" >
+        premark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      null,
+      <if test="pno != null" >
+        #{pno,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="pgrade != null" >
+        #{pgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="pkind != null" >
+        #{pkind,jdbcType=VARCHAR},
+      </if>
+      <if test="pfunds != null" >
+        #{pfunds,jdbcType=DOUBLE},
+      </if>
+      <if test="participants != null" >
+        #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="pstatime != null" >
+        #{pstatime,jdbcType=DATE},
+      </if>
+      <if test="pendtime != null" >
+        #{pendtime,jdbcType=DATE},
+      </if>
+      <if test="pcondition != null" >
+        #{pcondition,jdbcType=BIT},
+      </if>
+      <if test="psource != null" >
+        #{psource,jdbcType=VARCHAR},
+      </if>
+      <if test="paccessory != null" >
+        #{paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="kytype != null" >
+        #{kytype,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="paudit != null" >
+        #{paudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="premark != null" >
+        #{premark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.TProjectExample" resultType="java.lang.Integer" >
+    select count(*) from t_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_project
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pno != null" >
+        pno = #{record.pno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pgrade != null" >
+        pgrade = #{record.pgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkind != null" >
+        pkind = #{record.pkind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pfunds != null" >
+        pfunds = #{record.pfunds,jdbcType=DOUBLE},
+      </if>
+      <if test="record.participants != null" >
+        participants = #{record.participants,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pstatime != null" >
+        pstatime = #{record.pstatime,jdbcType=DATE},
+      </if>
+      <if test="record.pendtime != null" >
+        pendtime = #{record.pendtime,jdbcType=DATE},
+      </if>
+      <if test="record.pcondition != null" >
+        pcondition = #{record.pcondition,jdbcType=BIT},
+      </if>
+      <if test="record.psource != null" >
+        psource = #{record.psource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paccessory != null" >
+        paccessory = #{record.paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kytype != null" >
+        kytype = #{record.kytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paudit != null" >
+        paudit = #{record.paudit,jdbcType=BIT},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.premark != null" >
+        premark = #{record.premark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_project
+    set pid = #{record.pid,jdbcType=INTEGER},
+      pno = #{record.pno,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      tid = #{record.tid,jdbcType=INTEGER},
+      pgrade = #{record.pgrade,jdbcType=VARCHAR},
+      pkind = #{record.pkind,jdbcType=VARCHAR},
+      pfunds = #{record.pfunds,jdbcType=DOUBLE},
+      participants = #{record.participants,jdbcType=VARCHAR},
+      pstatime = #{record.pstatime,jdbcType=DATE},
+      pendtime = #{record.pendtime,jdbcType=DATE},
+      pcondition = #{record.pcondition,jdbcType=BIT},
+      psource = #{record.psource,jdbcType=VARCHAR},
+      paccessory = #{record.paccessory,jdbcType=VARCHAR},
+      kytype = #{record.kytype,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=VARCHAR},
+      paudit = #{record.paudit,jdbcType=BIT},
+      message = #{record.message,jdbcType=VARCHAR},
+      premark = #{record.premark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.TProject" >
+    update t_project
+    <set >
+      <if test="pno != null" >
+        pno = #{pno,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="pgrade != null" >
+        pgrade = #{pgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="pkind != null" >
+        pkind = #{pkind,jdbcType=VARCHAR},
+      </if>
+      <if test="pfunds != null" >
+        pfunds = #{pfunds,jdbcType=DOUBLE},
+      </if>
+      <if test="participants != null" >
+        participants = #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="pstatime != null" >
+        pstatime = #{pstatime,jdbcType=DATE},
+      </if>
+      <if test="pendtime != null" >
+        pendtime = #{pendtime,jdbcType=DATE},
+      </if>
+      <if test="pcondition != null" >
+        pcondition = #{pcondition,jdbcType=BIT},
+      </if>
+      <if test="psource != null" >
+        psource = #{psource,jdbcType=VARCHAR},
+      </if>
+      <if test="paccessory != null" >
+        paccessory = #{paccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="kytype != null" >
+        kytype = #{kytype,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="paudit != null" >
+        paudit = #{paudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="premark != null" >
+        premark = #{premark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.TProject" >
+    update t_project
+    set pno = #{pno,jdbcType=VARCHAR},
+      pname = #{pname,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      pgrade = #{pgrade,jdbcType=VARCHAR},
+      pkind = #{pkind,jdbcType=VARCHAR},
+      pfunds = #{pfunds,jdbcType=DOUBLE},
+      participants = #{participants,jdbcType=VARCHAR},
+      pstatime = #{pstatime,jdbcType=DATE},
+      pendtime = #{pendtime,jdbcType=DATE},
+      pcondition = #{pcondition,jdbcType=BIT},
+      psource = #{psource,jdbcType=VARCHAR},
+      paccessory = #{paccessory,jdbcType=VARCHAR},
+      kytype = #{kytype,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      paudit = #{paudit,jdbcType=BIT},
+      message = #{message,jdbcType=VARCHAR},
+      premark = #{premark,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selProjectInfoByUserId" parameterType="int" resultType="com.mytest.teainfoims.vo.TProject">
+    select p.*,t.teacher_name teacherName from t_user u inner join t_teacher t on u.username=t.teacher_no inner join t_project p on t.tid=p.tid
+    <where>
+        <if test="uid!=null">
+          uid=#{uid,jdbcType=INTEGER}
+        </if>
+
+    </where>
+  </select>
+
+  <select id="selProjectInfoByPid" parameterType="int" resultMap="BaseResultMap">
+    select
+    p.*,teacher_name teacherName
+    from t_project p inner join t_teacher t on p.tid=t.tid
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selAuditProjectList" parameterType="com.mytest.teainfoims.query.ProjectQuery" resultType="com.mytest.teainfoims.vo.TProject">
+    select * from t_project p inner join t_teacher t on p.tid=t.tid
+    <where>
+      <if test="paudit==null">
+        paudit is null
+      </if>
+      <if test="paudit != null">
+        paudit=#{paudit}
+      </if>
+
+      <if test="teacherName != null and teacherName !=''">
+        and teacher_name like concat('%',#{teacherName},'%')
+      </if>
+      <if test="pname != null and pname != ''">
+        and pname like concat('%',#{pname},'%')
+      </if>
+      order by pstatime desc
+    </where>
+  </select>
+</mapper>

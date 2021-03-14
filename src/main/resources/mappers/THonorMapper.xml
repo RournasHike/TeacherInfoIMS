@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.THonorMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.THonor" >
+    <id column="hid" property="hid" jdbcType="INTEGER" />
+    <result column="hno" property="hno" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="hname" property="hname" jdbcType="VARCHAR" />
+    <result column="participants" property="participants" jdbcType="VARCHAR" />
+    <result column="hdate" property="hdate" jdbcType="DATE" />
+    <result column="hcompany" property="hcompany" jdbcType="VARCHAR" />
+    <result column="hdepartment" property="hdepartment" jdbcType="VARCHAR" />
+    <result column="hgrade" property="hgrade" jdbcType="VARCHAR" />
+    <result column="hlevel" property="hlevel" jdbcType="VARCHAR" />
+    <result column="htype" property="htype" jdbcType="VARCHAR" />
+    <result column="kytype" property="kytype" jdbcType="VARCHAR" />
+    <result column="haccessory_url" property="haccessoryUrl" jdbcType="VARCHAR" />
+    <result column="haudit" property="haudit" jdbcType="BIT" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hid, hno, tid, hname, participants, hdate, hcompany, hdepartment, hgrade, hlevel, 
+    htype, kytype, haccessory_url, haudit, message, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.THonorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_honor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_honor
+    where hid = #{hid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_honor
+    where hid = #{hid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.THonorExample" >
+    delete from t_honor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.THonor" >
+    insert into t_honor (hid, hno, tid, 
+      hname, participants, hdate, 
+      hcompany, hdepartment, hgrade, 
+      hlevel, htype, kytype, 
+      haccessory_url, haudit, message, 
+      remark)
+    values (#{hid,jdbcType=INTEGER}, #{hno,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, 
+      #{hname,jdbcType=VARCHAR}, #{participants,jdbcType=VARCHAR}, #{hdate,jdbcType=DATE}, 
+      #{hcompany,jdbcType=VARCHAR}, #{hdepartment,jdbcType=VARCHAR}, #{hgrade,jdbcType=VARCHAR}, 
+      #{hlevel,jdbcType=VARCHAR}, #{htype,jdbcType=VARCHAR}, #{kytype,jdbcType=VARCHAR}, 
+      #{haccessoryUrl,jdbcType=VARCHAR}, #{haudit,jdbcType=BIT}, #{message,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.THonor" >
+    insert into t_honor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      hid,
+      <if test="hno != null" >
+        hno,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="hname != null" >
+        hname,
+      </if>
+      <if test="participants != null" >
+        participants,
+      </if>
+      <if test="hdate != null" >
+        hdate,
+      </if>
+      <if test="hcompany != null" >
+        hcompany,
+      </if>
+      <if test="hdepartment != null" >
+        hdepartment,
+      </if>
+      <if test="hgrade != null" >
+        hgrade,
+      </if>
+      <if test="hlevel != null" >
+        hlevel,
+      </if>
+      <if test="htype != null" >
+        htype,
+      </if>
+      <if test="kytype != null" >
+        kytype,
+      </if>
+      <if test="haccessoryUrl != null" >
+        haccessory_url,
+      </if>
+      <if test="haudit != null" >
+        haudit,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      null,
+      <if test="hno != null" >
+        #{hno,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="hname != null" >
+        #{hname,jdbcType=VARCHAR},
+      </if>
+      <if test="participants != null" >
+        #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="hdate != null" >
+        #{hdate,jdbcType=DATE},
+      </if>
+      <if test="hcompany != null" >
+        #{hcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="hdepartment != null" >
+        #{hdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="hgrade != null" >
+        #{hgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="hlevel != null" >
+        #{hlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="htype != null" >
+        #{htype,jdbcType=VARCHAR},
+      </if>
+      <if test="kytype != null" >
+        #{kytype,jdbcType=VARCHAR},
+      </if>
+      <if test="haccessoryUrl != null" >
+        #{haccessoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="haudit != null" >
+        #{haudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.THonorExample" resultType="java.lang.Integer" >
+    select count(*) from t_honor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_honor
+    <set >
+      <if test="record.hid != null" >
+        hid = #{record.hid,jdbcType=INTEGER},
+      </if>
+      <if test="record.hno != null" >
+        hno = #{record.hno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.hname != null" >
+        hname = #{record.hname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participants != null" >
+        participants = #{record.participants,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hdate != null" >
+        hdate = #{record.hdate,jdbcType=DATE},
+      </if>
+      <if test="record.hcompany != null" >
+        hcompany = #{record.hcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hdepartment != null" >
+        hdepartment = #{record.hdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hgrade != null" >
+        hgrade = #{record.hgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hlevel != null" >
+        hlevel = #{record.hlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htype != null" >
+        htype = #{record.htype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kytype != null" >
+        kytype = #{record.kytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haccessoryUrl != null" >
+        haccessory_url = #{record.haccessoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haudit != null" >
+        haudit = #{record.haudit,jdbcType=BIT},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_honor
+    set hid = #{record.hid,jdbcType=INTEGER},
+      hno = #{record.hno,jdbcType=VARCHAR},
+      tid = #{record.tid,jdbcType=INTEGER},
+      hname = #{record.hname,jdbcType=VARCHAR},
+      participants = #{record.participants,jdbcType=VARCHAR},
+      hdate = #{record.hdate,jdbcType=DATE},
+      hcompany = #{record.hcompany,jdbcType=VARCHAR},
+      hdepartment = #{record.hdepartment,jdbcType=VARCHAR},
+      hgrade = #{record.hgrade,jdbcType=VARCHAR},
+      hlevel = #{record.hlevel,jdbcType=VARCHAR},
+      htype = #{record.htype,jdbcType=VARCHAR},
+      kytype = #{record.kytype,jdbcType=VARCHAR},
+      haccessory_url = #{record.haccessoryUrl,jdbcType=VARCHAR},
+      haudit = #{record.haudit,jdbcType=BIT},
+      message = #{record.message,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.THonor" >
+    update t_honor
+    <set >
+      <if test="hno != null" >
+        hno = #{hno,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="hname != null" >
+        hname = #{hname,jdbcType=VARCHAR},
+      </if>
+      <if test="participants != null" >
+        participants = #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="hdate != null" >
+        hdate = #{hdate,jdbcType=DATE},
+      </if>
+      <if test="hcompany != null" >
+        hcompany = #{hcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="hdepartment != null" >
+        hdepartment = #{hdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="hgrade != null" >
+        hgrade = #{hgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="hlevel != null" >
+        hlevel = #{hlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="htype != null" >
+        htype = #{htype,jdbcType=VARCHAR},
+      </if>
+      <if test="kytype != null" >
+        kytype = #{kytype,jdbcType=VARCHAR},
+      </if>
+      <if test="haccessoryUrl != null" >
+        haccessory_url = #{haccessoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="haudit != null" >
+        haudit = #{haudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.THonor" >
+    update t_honor
+    set hno = #{hno,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      hname = #{hname,jdbcType=VARCHAR},
+      participants = #{participants,jdbcType=VARCHAR},
+      hdate = #{hdate,jdbcType=DATE},
+      hcompany = #{hcompany,jdbcType=VARCHAR},
+      hdepartment = #{hdepartment,jdbcType=VARCHAR},
+      hgrade = #{hgrade,jdbcType=VARCHAR},
+      hlevel = #{hlevel,jdbcType=VARCHAR},
+      htype = #{htype,jdbcType=VARCHAR},
+      kytype = #{kytype,jdbcType=VARCHAR},
+      haccessory_url = #{haccessoryUrl,jdbcType=VARCHAR},
+      haudit = #{haudit,jdbcType=BIT},
+      message = #{message,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selHonorInfoByUserId" parameterType="int" resultType="com.mytest.teainfoims.vo.THonor">
+    select h.*,t.teacher_name teacherName from t_user u inner join t_teacher t on u.username=t.teacher_no inner join t_honor h on t.tid=h.tid
+    <where>
+      <if test="uid!=null">
+        uid=#{uid,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selHonorInfoByHid" parameterType="int" resultType="com.mytest.teainfoims.vo.THonor">
+    select
+      h.*,teacher_name teacherName
+    from t_honor h inner join t_teacher t on h.tid=t.tid
+    where hid = #{hid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selAuditHonorList" parameterType="com.mytest.teainfoims.query.HonorQuery" resultType="com.mytest.teainfoims.vo.THonor">
+    select h.*,teacher_name teacherName from t_honor h inner join t_teacher t on t.tid=h.tid
+    <where>
+      <if test="haudit==null">
+        haudit is null
+      </if>
+      <if test="haudit != null">
+        haudit=#{haudit}
+      </if>
+      <if test="teacherName != null and teacherName != ''">
+        and teacher_name like concat('%',#{teacherName},'%')
+      </if>
+      <if test="hname != null and hname !=''">
+        and hname like concat('%',#{hname},'%')
+      </if>
+      order by hdate desc
+    </where>
+  </select>
+</mapper>

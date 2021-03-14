@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytest.teainfoims.dao.TPaperMapper" >
+  <resultMap id="BaseResultMap" type="com.mytest.teainfoims.vo.TPaper" >
+    <id column="paid" property="paid" jdbcType="INTEGER" />
+    <result column="pano" property="pano" jdbcType="VARCHAR" />
+    <result column="paname" property="paname" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="pagrade" property="pagrade" jdbcType="VARCHAR" />
+    <result column="papublish" property="papublish" jdbcType="VARCHAR" />
+    <result column="padate" property="padate" jdbcType="DATE" />
+    <result column="pakind" property="pakind" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="letternum" property="letternum" jdbcType="INTEGER" />
+    <result column="pub_year" property="pubYear" jdbcType="INTEGER" />
+    <result column="pub_volume" property="pubVolume" jdbcType="INTEGER" />
+    <result column="pub_stage" property="pubStage" jdbcType="INTEGER" />
+    <result column="dependency" property="dependency" jdbcType="VARCHAR" />
+    <result column="paccesssory" property="paccesssory" jdbcType="VARCHAR" />
+    <result column="paudit" property="paudit" jdbcType="BIT" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="paremark" property="paremark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    paid, pano, paname, tid, pagrade, papublish, padate, pakind, subject, content, letternum, 
+    pub_year, pub_volume, pub_stage, dependency, paccesssory, paudit, message, paremark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TPaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_paper
+    where paid = #{paid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_paper
+    where paid = #{paid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mytest.teainfoims.vo.TPaperExample" >
+    delete from t_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mytest.teainfoims.vo.TPaper" >
+    insert into t_paper (paid, pano, paname, 
+      tid, pagrade, papublish, 
+      padate, pakind, subject, 
+      content, letternum, pub_year, 
+      pub_volume, pub_stage, dependency, 
+      paccesssory, paudit, message, 
+      paremark)
+    values (#{paid,jdbcType=INTEGER}, #{pano,jdbcType=VARCHAR}, #{paname,jdbcType=VARCHAR}, 
+      #{tid,jdbcType=INTEGER}, #{pagrade,jdbcType=VARCHAR}, #{papublish,jdbcType=VARCHAR}, 
+      #{padate,jdbcType=DATE}, #{pakind,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{letternum,jdbcType=INTEGER}, #{pubYear,jdbcType=INTEGER}, 
+      #{pubVolume,jdbcType=INTEGER}, #{pubStage,jdbcType=INTEGER}, #{dependency,jdbcType=VARCHAR}, 
+      #{paccesssory,jdbcType=VARCHAR}, #{paudit,jdbcType=BIT}, #{message,jdbcType=VARCHAR}, 
+      #{paremark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TPaper" >
+    insert into t_paper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        paid,
+      <if test="pano != null" >
+        pano,
+      </if>
+      <if test="paname != null" >
+        paname,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="pagrade != null" >
+        pagrade,
+      </if>
+      <if test="papublish != null" >
+        papublish,
+      </if>
+      <if test="padate != null" >
+        padate,
+      </if>
+      <if test="pakind != null" >
+        pakind,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="letternum != null" >
+        letternum,
+      </if>
+      <if test="pubYear != null" >
+        pub_year,
+      </if>
+      <if test="pubVolume != null" >
+        pub_volume,
+      </if>
+      <if test="pubStage != null" >
+        pub_stage,
+      </if>
+      <if test="dependency != null" >
+        dependency,
+      </if>
+      <if test="paccesssory != null" >
+        paccesssory,
+      </if>
+      <if test="paudit != null" >
+        paudit,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="paremark != null" >
+        paremark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      null,
+      <if test="pano != null" >
+        #{pano,jdbcType=VARCHAR},
+      </if>
+      <if test="paname != null" >
+        #{paname,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="pagrade != null" >
+        #{pagrade,jdbcType=VARCHAR},
+      </if>
+      <if test="papublish != null" >
+        #{papublish,jdbcType=VARCHAR},
+      </if>
+      <if test="padate != null" >
+        #{padate,jdbcType=DATE},
+      </if>
+      <if test="pakind != null" >
+        #{pakind,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="letternum != null" >
+        #{letternum,jdbcType=INTEGER},
+      </if>
+      <if test="pubYear != null" >
+        #{pubYear,jdbcType=INTEGER},
+      </if>
+      <if test="pubVolume != null" >
+        #{pubVolume,jdbcType=INTEGER},
+      </if>
+      <if test="pubStage != null" >
+        #{pubStage,jdbcType=INTEGER},
+      </if>
+      <if test="dependency != null" >
+        #{dependency,jdbcType=VARCHAR},
+      </if>
+      <if test="paccesssory != null" >
+        #{paccesssory,jdbcType=VARCHAR},
+      </if>
+      <if test="paudit != null" >
+        #{paudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="paremark != null" >
+        #{paremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mytest.teainfoims.vo.TPaperExample" resultType="java.lang.Integer" >
+    select count(*) from t_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_paper
+    <set >
+      <if test="record.paid != null" >
+        paid = #{record.paid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pano != null" >
+        pano = #{record.pano,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paname != null" >
+        paname = #{record.paname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pagrade != null" >
+        pagrade = #{record.pagrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.papublish != null" >
+        papublish = #{record.papublish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.padate != null" >
+        padate = #{record.padate,jdbcType=DATE},
+      </if>
+      <if test="record.pakind != null" >
+        pakind = #{record.pakind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subject != null" >
+        subject = #{record.subject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.letternum != null" >
+        letternum = #{record.letternum,jdbcType=INTEGER},
+      </if>
+      <if test="record.pubYear != null" >
+        pub_year = #{record.pubYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.pubVolume != null" >
+        pub_volume = #{record.pubVolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.pubStage != null" >
+        pub_stage = #{record.pubStage,jdbcType=INTEGER},
+      </if>
+      <if test="record.dependency != null" >
+        dependency = #{record.dependency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paccesssory != null" >
+        paccesssory = #{record.paccesssory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paudit != null" >
+        paudit = #{record.paudit,jdbcType=BIT},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paremark != null" >
+        paremark = #{record.paremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_paper
+    set paid = #{record.paid,jdbcType=INTEGER},
+      pano = #{record.pano,jdbcType=VARCHAR},
+      paname = #{record.paname,jdbcType=VARCHAR},
+      tid = #{record.tid,jdbcType=INTEGER},
+      pagrade = #{record.pagrade,jdbcType=VARCHAR},
+      papublish = #{record.papublish,jdbcType=VARCHAR},
+      padate = #{record.padate,jdbcType=DATE},
+      pakind = #{record.pakind,jdbcType=VARCHAR},
+      subject = #{record.subject,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      letternum = #{record.letternum,jdbcType=INTEGER},
+      pub_year = #{record.pubYear,jdbcType=INTEGER},
+      pub_volume = #{record.pubVolume,jdbcType=INTEGER},
+      pub_stage = #{record.pubStage,jdbcType=INTEGER},
+      dependency = #{record.dependency,jdbcType=VARCHAR},
+      paccesssory = #{record.paccesssory,jdbcType=VARCHAR},
+      paudit = #{record.paudit,jdbcType=BIT},
+      message = #{record.message,jdbcType=VARCHAR},
+      paremark = #{record.paremark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mytest.teainfoims.vo.TPaper" >
+    update t_paper
+    <set >
+      <if test="pano != null" >
+        pano = #{pano,jdbcType=VARCHAR},
+      </if>
+      <if test="paname != null" >
+        paname = #{paname,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="pagrade != null" >
+        pagrade = #{pagrade,jdbcType=VARCHAR},
+      </if>
+      <if test="papublish != null" >
+        papublish = #{papublish,jdbcType=VARCHAR},
+      </if>
+      <if test="padate != null" >
+        padate = #{padate,jdbcType=DATE},
+      </if>
+      <if test="pakind != null" >
+        pakind = #{pakind,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="letternum != null" >
+        letternum = #{letternum,jdbcType=INTEGER},
+      </if>
+      <if test="pubYear != null" >
+        pub_year = #{pubYear,jdbcType=INTEGER},
+      </if>
+      <if test="pubVolume != null" >
+        pub_volume = #{pubVolume,jdbcType=INTEGER},
+      </if>
+      <if test="pubStage != null" >
+        pub_stage = #{pubStage,jdbcType=INTEGER},
+      </if>
+      <if test="dependency != null" >
+        dependency = #{dependency,jdbcType=VARCHAR},
+      </if>
+      <if test="paccesssory != null" >
+        paccesssory = #{paccesssory,jdbcType=VARCHAR},
+      </if>
+      <if test="paudit != null" >
+        paudit = #{paudit,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="paremark != null" >
+        paremark = #{paremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where paid = #{paid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mytest.teainfoims.vo.TPaper" >
+    update t_paper
+    set pano = #{pano,jdbcType=VARCHAR},
+      paname = #{paname,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      pagrade = #{pagrade,jdbcType=VARCHAR},
+      papublish = #{papublish,jdbcType=VARCHAR},
+      padate = #{padate,jdbcType=DATE},
+      pakind = #{pakind,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      letternum = #{letternum,jdbcType=INTEGER},
+      pub_year = #{pubYear,jdbcType=INTEGER},
+      pub_volume = #{pubVolume,jdbcType=INTEGER},
+      pub_stage = #{pubStage,jdbcType=INTEGER},
+      dependency = #{dependency,jdbcType=VARCHAR},
+      paccesssory = #{paccesssory,jdbcType=VARCHAR},
+      paudit = #{paudit,jdbcType=BIT},
+      message = #{message,jdbcType=VARCHAR},
+      paremark = #{paremark,jdbcType=VARCHAR}
+    where paid = #{paid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selPaperInfoByUserId" parameterType="int" resultType="com.mytest.teainfoims.vo.TPaper">
+    select p.*,t.teacher_name teacherName from t_user u inner join t_teacher t on u.username=t.teacher_no inner join t_paper p on t.tid=p.tid
+    <where>
+      <if test="uid!=null">
+        uid=#{uid,jdbcType=INTEGER}
+      </if>
+
+    </where>
+  </select>
+
+  <select id="selPaperByPaid" resultType="com.mytest.teainfoims.vo.TPaper" parameterType="int">
+    select
+      p.*,teacher_name teacherName
+    from t_paper p inner join t_teacher t on p.tid=t.tid
+    where paid = #{paid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selAuditPaperList" parameterType="com.mytest.teainfoims.query.PaperQuery" resultType="com.mytest.teainfoims.vo.TPaper">
+    select * from t_paper p inner join t_teacher t on p.tid=t.tid
+    <where>
+      <if test="paudit==null">
+        paudit is null
+      </if>
+      <if test="paudit != null">
+        paudit=#{paudit}
+      </if>
+
+      <if test="teacherName != null and teacherName !=''">
+        and teacher_name like concat('%',#{teacherName},'%')
+      </if>
+      <if test="paname != null and paname != ''">
+        and paname like concat('%',#{paname},'%')
+      </if>
+      order by padate desc
+    </where>
+  </select>
+
+
+</mapper>
