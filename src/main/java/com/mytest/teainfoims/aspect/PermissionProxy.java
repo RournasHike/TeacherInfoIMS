@@ -24,8 +24,8 @@ public class PermissionProxy {
     private HttpSession session;
 
     /**
-     * 切面会拦截指定包下的指定注解
-     *  拦截com.xxxx.crm.annoation的RequiredPermission注解
+     * 切面会拦截指定包下的指定注解,拦截com.xxxx.crm.annoation的RequiredPermission注解
+     *
      *
      * @param pjp
      * @return java.lang.Object
