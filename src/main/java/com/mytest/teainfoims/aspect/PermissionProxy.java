@@ -27,9 +27,6 @@ public class PermissionProxy {
      * 切面会拦截指定包下的指定注解
      *  拦截com.xxxx.crm.annoation的RequiredPermission注解
      *
-     *
-     * 乐字节：专注线上IT培训
-     * 答疑老师微信：lezijie
      * @param pjp
      * @return java.lang.Object
      */
