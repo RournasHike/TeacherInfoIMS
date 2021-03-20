@@ -46,7 +46,20 @@ layui.use(['form', 'layer' ,'upload','jquery','element'], function () {
     /**
      * 表单Submit监听
      */
-    form.on('submit(addOrUpdateHonor)', function (data) {
+    form.on('submit(teachAssign)', function (data) {
+
+        var isDoubleWeek,isSingleWeek;
+        if($("input[name='isSingleWeek']:radio:checked").val().toString()=="1"){
+            isSingleWeek=true;
+        }else if ($("input[name='isSingleWeek']:radio:checked").val().toString()=="0"){
+            isSingleWeek=false;
+        }
+
+        if($("input[name='isDoubleWeek']:radio:checked").val().toString()=="1"){
+            isDoubleWeek=true;
+        }else if ($("input[name='isDoubleWeek']:radio:checked").val().toString()=="0"){
+            isDoubleWeek=false;
+        }
 
         // 提交数据时的加载层 （https://layer.layui.com/）
         var index = top.layer.msg("数据提交中,请稍后...",{
@@ -59,17 +72,9 @@ layui.use(['form', 'layer' ,'upload','jquery','element'], function () {
         var formData = data.field;
         console.log(formData);
 
+
         // 请求的地址
-        var url = ctx + "/honor/addHonor"; // 添加操作
-
-
-        // 判断用户ID是否为空，如果不为空则为更新操作
-        if ($("#hid").val()) {
-            var hid=$("#hid").val();
-            // 更新操作
-            url = ctx + "/honor/updateHonor?hid="+hid;
-        }
-
+        var url = ctx + "/teach/teachAssign?isSingleWeek="+isSingleWeek+"&isDoubleWeek="+isDoubleWeek; // 添加操作
 
         $.post(url, formData, function (result) {
             // 判断操作是否执行成功 200=成功

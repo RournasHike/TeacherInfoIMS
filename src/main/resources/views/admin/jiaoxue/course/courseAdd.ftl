@@ -25,7 +25,7 @@
         <label class="layui-form-label">课程类型</label>
         <div class="layui-input-block">
             <select name="courseType" lay-verify="required">
-                <option value="" disabled>--请选择--</option>
+                <option value="" selected="selected">--请选择--</option>
                 <option value="必修课">必修课</option>
                 <option value="选修课">选修课</option>
             </select>

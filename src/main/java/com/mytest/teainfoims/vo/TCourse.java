@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 public class TCourse {
     private Integer id;
 
-    @Pattern(regexp = "A\\d{8}",message = "课程编号格式不正确")
+    @Pattern(regexp = "A\\d{9}",message = "课程编号格式不正确")
     private String courseNo;
 
     private String courseName;
@@ -14,23 +14,23 @@ public class TCourse {
     private String courseType;
 
     @Max(value = 5,message = "超出周学时范围")
-    @Min(value = 1,message = "低于学时范围")
+    @Min(value = 0,message = "低于学时范围")
     private Integer weekClassHour;
 
-    @Max(value = 50,message = "超出讲授学时范围")
-    @Min(value = 1,message = "低于学时范围")
+    @Max(value = 100,message = "超出讲授学时范围")
+    @Min(value = 0,message = "低于学时范围")
     private Integer teachClassHour;
 
-    @Max(value = 50,message = "超出实验学时范围")
-    @Min(value = 1,message = "低于学时范围")
+    @Max(value = 100,message = "超出实验学时范围")
+    @Min(value = 0,message = "低于学时范围")
     private Integer experimentClassHour;
 
-    @Max(value = 50,message = "超出上机学时范围")
-    @Min(value = 1,message = "低于学时范围")
+    @Max(value = 100,message = "超出上机学时范围")
+    @Min(value = 0,message = "低于学时范围")
     private Integer computerClassHour;
 
-    @Max(value = 20,message = "超出其他学时范围")
-    @Min(value = 1,message = "低于学时范围")
+    @Max(value = 100,message = "超出其他学时范围")
+    @Min(value = 0,message = "低于学时范围")
     private Integer otherClassHour;
 
     @Max(value = 100,message = "超出上机学时范围")

@@ -40,4 +40,10 @@ public interface TTeacherMapper {
     int deleteByTno(String teacherNo);
 
     int queryTeaIdByTeacherName(String teacherName);
+
+    List<TTeacher> getTeachersByCond(Integer collegeId,Integer deptId);
+
+    TTeacher selTeacherByName(String teacherName);
+
+    List<TTeacher> getAllTeachers();
 }

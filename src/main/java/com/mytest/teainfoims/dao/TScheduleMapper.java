@@ -27,4 +27,6 @@ public interface TScheduleMapper {
     int updateByPrimaryKeySelective(TSchedule record);
 
     int updateByPrimaryKey(TSchedule record);
+
+    List<TSchedule> getScheduleInfoByRid(Integer rid);
 }

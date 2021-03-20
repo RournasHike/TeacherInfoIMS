@@ -337,6 +337,22 @@
   </update>
 
   <!-- 多条件查询 -->
+  <select id="selCourseCondList" parameterType="com.mytest.teainfoims.query.CourseQuery" resultType="com.mytest.teainfoims.vo.TCourse">
+    select * from t_course tc inner join t_teach tt on tt.cid=tc.id inner join t_teacher ta on ta.tid=tt.tid
+    <where>
+      state = 1
+      <if test="teacherName!=null and teacherName!=''">
+        and teacher_name=#{teacherName}
+      </if>
+      <if test="classYear!=null and classYear!=''">
+        and teach_class_year=#{classYear}
+      </if>
+      <if test="classTerm!=null and classTerm!=''">
+        and teach_class_term=#{classTerm}
+      </if>
+    </where>
+  </select>
+
   <select id="selCourseList" parameterType="com.mytest.teainfoims.query.base.BaseQuery" resultType="com.mytest.teainfoims.vo.TCourse">
     select
     <include refid="Base_Column_List"></include>
@@ -344,6 +360,30 @@
     t_course
     <where>
       state = 1
+    </where>
+  </select>
+
+  <!--根据id查询记录-->
+  <select id="selCourseById" resultType="com.mytest.teainfoims.vo.TCourse" parameterType="int">
+    select * from t_course
+    <where>
+      state=1
+      <if test="id!=null">
+      and  id=#{id}
+      </if>
+    </where>
+  </select>
+
+  <select id="selAllCourse" resultType="com.mytest.teainfoims.vo.TCourse">
+    select * from t_course
+  </select>
+
+  <select id="selCourseByName" resultType="com.mytest.teainfoims.vo.TCourse">
+    select * from t_course
+    <where>
+      <if test="courseName!=null and courseName!=''">
+        course_name=#{courseName}
+      </if>
     </where>
   </select>
 </mapper>

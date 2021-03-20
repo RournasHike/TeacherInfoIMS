@@ -23,4 +23,8 @@ public class DeptService extends BaseService<TDept,Integer> {
     public List<TDept> selAllDept(){
         return tDeptMapper.selAllDept();
     }
+
+    public TDept selDeptById(Integer id){
+        return tDeptMapper.selectByPrimaryKey(id);
+    }
 }

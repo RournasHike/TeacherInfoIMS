@@ -634,6 +634,146 @@ public class TTeachExample {
             return (Criteria) this;
         }
 
+        public Criteria andStartCollegeIsNull() {
+            addCriterion("start_college is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeIsNotNull() {
+            addCriterion("start_college is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeEqualTo(String value) {
+            addCriterion("start_college =", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeNotEqualTo(String value) {
+            addCriterion("start_college <>", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeGreaterThan(String value) {
+            addCriterion("start_college >", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeGreaterThanOrEqualTo(String value) {
+            addCriterion("start_college >=", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeLessThan(String value) {
+            addCriterion("start_college <", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeLessThanOrEqualTo(String value) {
+            addCriterion("start_college <=", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeLike(String value) {
+            addCriterion("start_college like", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeNotLike(String value) {
+            addCriterion("start_college not like", value, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeIn(List<String> values) {
+            addCriterion("start_college in", values, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeNotIn(List<String> values) {
+            addCriterion("start_college not in", values, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeBetween(String value1, String value2) {
+            addCriterion("start_college between", value1, value2, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartCollegeNotBetween(String value1, String value2) {
+            addCriterion("start_college not between", value1, value2, "startCollege");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptIsNull() {
+            addCriterion("start_dept is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptIsNotNull() {
+            addCriterion("start_dept is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptEqualTo(String value) {
+            addCriterion("start_dept =", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptNotEqualTo(String value) {
+            addCriterion("start_dept <>", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptGreaterThan(String value) {
+            addCriterion("start_dept >", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptGreaterThanOrEqualTo(String value) {
+            addCriterion("start_dept >=", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptLessThan(String value) {
+            addCriterion("start_dept <", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptLessThanOrEqualTo(String value) {
+            addCriterion("start_dept <=", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptLike(String value) {
+            addCriterion("start_dept like", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptNotLike(String value) {
+            addCriterion("start_dept not like", value, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptIn(List<String> values) {
+            addCriterion("start_dept in", values, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptNotIn(List<String> values) {
+            addCriterion("start_dept not in", values, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptBetween(String value1, String value2) {
+            addCriterion("start_dept between", value1, value2, "startDept");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartDeptNotBetween(String value1, String value2) {
+            addCriterion("start_dept not between", value1, value2, "startDept");
+            return (Criteria) this;
+        }
+
         public Criteria andPrescribedClassHourIsNull() {
             addCriterion("prescribed_class_hour is null");
             return (Criteria) this;

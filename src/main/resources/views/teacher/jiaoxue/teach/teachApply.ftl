@@ -14,13 +14,13 @@
 </head>
 <body class="childrenBody">
 <form class="layui-form" style="width:80%;">
-    <#--<div class="layui-form-item layui-row layui-col-xs12">
+    <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">课程编号</label>
         <div class="layui-input-block">
             <input type="text" class="layui-input userName"
                    lay-verify="required" name="courseNo" id="courseNo" placeholder="请输入课程编号" value="${(course.courseNo)!}">
         </div>
-    </div>-->
+    </div>
 
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">课程名称</label>

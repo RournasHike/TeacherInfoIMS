@@ -27,4 +27,8 @@ public interface TTeachRoomMapper {
     int updateByPrimaryKeySelective(TTeachRoom record);
 
     int updateByPrimaryKey(TTeachRoom record);
+
+    List<TTeachRoom> getAllTeachRoom();
+
+    TTeachRoom selTeachRoomByName(String teachRoomName);
 }

@@ -236,7 +236,6 @@
                                     <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="course/list" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 课程列表</span></a>
                                 </dd>
                                 </#if>
-
                             </dl>
                         </li>
                     </#if>
@@ -249,11 +248,11 @@
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3" data-tab="teach/assign" target="_self"><i class="fa fa-exchange"></i><span class="layui-left-nav"> 授课分配(排课)</span></a>
                                     </dd>
                                 </#if>
-                                <#if permissionList?seq_contains("13020")>
+                                <#--<#if permissionList?seq_contains("13020")>
                                     <dd>
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="teach/apply" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 授课申请</span></a>
                                     </dd>
-                                </#if>
+                                </#if>-->
                                 <#if permissionList?seq_contains("13030")>
                                     <dd>
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="teach/query" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 授课查询</span></a>
@@ -261,10 +260,9 @@
                                 </#if>
                                 <#if permissionList?seq_contains("13040")>
                                     <dd>
-                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="teach/auditList" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 授课审核</span></a>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="teach/teachListPage" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 授课列表</span></a>
                                     </dd>
                                 </#if>
-
                             </dl>
                         </li>
                     </#if>
@@ -281,11 +279,6 @@
                         </li>
                     </#if>
 
-                    <#--<#if permissionList?seq_contains("10000")>
-                        <li class="layui-nav-item">
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3" data-tab="query/all" target="_self"><i class="fa fa-exchange"></i><span class="layui-left-nav"> 综合查询</span></a>
-                        </li>
-                    </#if>-->
 
                     <span class="layui-nav-bar" style="top: 201px; height: 0px; opacity: 0;"></span>
                 </ul>

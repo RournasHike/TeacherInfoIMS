@@ -1,5 +1,7 @@
 package com.mytest.teainfoims.dao;
 
+import com.mytest.teainfoims.query.TeachQuery;
+import com.mytest.teainfoims.query.base.BaseQuery;
 import com.mytest.teainfoims.vo.TTeach;
 import com.mytest.teainfoims.vo.TTeachExample;
 import java.util.List;
@@ -27,4 +29,8 @@ public interface TTeachMapper {
     int updateByPrimaryKeySelective(TTeach record);
 
     int updateByPrimaryKey(TTeach record);
+
+    List<TTeach> selTeachList(BaseQuery query);
+
+    List<TTeach> selTeachCondList(TeachQuery query);
 }

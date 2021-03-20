@@ -3,6 +3,7 @@ package com.mytest.teainfoims.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mytest.teainfoims.dao.TCourseMapper;
+import com.mytest.teainfoims.query.CourseQuery;
 import com.mytest.teainfoims.query.base.BaseQuery;
 import com.mytest.teainfoims.service.base.BaseService;
 import com.mytest.teainfoims.utils.AssertUtil;
@@ -26,6 +27,22 @@ public class CourseService extends BaseService<TCourse,Integer> {
 
     @Resource
     private TCourseMapper tCourseMapper;
+
+    public Map<String,Object> queryCourseCondList(CourseQuery query){
+        Map<String,Object> result=new HashMap<>();
+
+        //使用PageHelper进行分页
+        PageHelper.startPage(query.getPage(),query.getLimit());
+        List<TCourse> tCourses = tCourseMapper.selCourseCondList(query);
+
+        PageInfo pageInfo=new PageInfo(tCourses);
+        //封装返回结果
+        result.put("count",pageInfo.getTotal());
+        result.put("data",pageInfo.getList());
+        result.put("code",0);
+        result.put("msg","分页查询");
+        return result;
+    }
 
     public Map<String,Object> queryCourseList(BaseQuery query){
         Map<String,Object> result=new HashMap<>();
@@ -51,4 +68,39 @@ public class CourseService extends BaseService<TCourse,Integer> {
         int index = tCourseMapper.insertSelective(tCourse);
         AssertUtil.isTrue(index<1,"课程添加失败");
     }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @SuppressWarnings("all")
+    public void deleteCourse(Integer id){
+        AssertUtil.isTrue(id==null,"参数错误");
+        int index = tCourseMapper.deleteByPrimaryKey(id);
+        AssertUtil.isTrue(index<1,"课程删除成功");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @SuppressWarnings("all")
+    public void updateCourse(TCourse tCourse){
+        AssertUtil.isTrue(tCourse==null,"课程信息为空");
+        int index = tCourseMapper.updateByPrimaryKeySelective(tCourse);
+        AssertUtil.isTrue(index<1,"更新课程失败");
+    }
+
+    public TCourse getCourseById(Integer id){
+        AssertUtil.isTrue(id==null,"参数错误");
+        TCourse tCourse = tCourseMapper.selCourseById(id);
+        AssertUtil.isTrue(tCourse==null,"课程记录为空");
+        return tCourse;
+    }
+
+    public TCourse getCourseByName(String courseName){
+        AssertUtil.isTrue(courseName==null,"参数错误");
+        TCourse tCourse = tCourseMapper.selCourseByName(courseName);
+        AssertUtil.isTrue(tCourse==null,"记录为空");
+        return tCourse;
+    }
+
+    public List<TCourse> getAllCourse(){
+        return tCourseMapper.selAllCourse();
+    }
 }
+

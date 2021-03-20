@@ -9,6 +9,12 @@ public class TSchedule {
 
     private Integer rid;
 
+    private String teacherName;
+
+    private String courseName;
+
+    private String teachRoomName;
+
     private String classYear;
 
     private String classTerm;
@@ -55,6 +61,30 @@ public class TSchedule {
 
     public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+    public String getTeachRoomName() {
+        return teachRoomName;
+    }
+
+    public void setTeachRoomName(String teachRoomName) {
+        this.teachRoomName = teachRoomName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getClassYear() {

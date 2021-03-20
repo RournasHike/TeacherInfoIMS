@@ -14,6 +14,7 @@ import com.mytest.teainfoims.utils.AssertUtil;
 import com.mytest.teainfoims.utils.Md5Util;
 import com.mytest.teainfoims.utils.NoUtil;
 import com.mytest.teainfoims.utils.SysMessageUtil;
+import com.mytest.teainfoims.vo.TTeach;
 import com.mytest.teainfoims.vo.TTeacher;
 import com.mytest.teainfoims.vo.TUser;
 import org.apache.commons.lang3.StringUtils;
@@ -54,6 +55,9 @@ public class TeacherService extends BaseService<TTeacher,Integer> {
     @Resource
     private TDeptMapper tDeptMapper;
 
+    public TTeacher getTeacherById(Integer id){
+        return tTeacherMapper.selectByPrimaryKey(id);
+    }
 
     /**
      * 根据用户名(即教师编号)查询教师个人信息
@@ -70,6 +74,25 @@ public class TeacherService extends BaseService<TTeacher,Integer> {
         //判断教师对象是否为空
         AssertUtil.isTrue(tTeacher == null, "该教师不存在");
         return tTeacher;
+    }
+
+    /**
+     * 获取所有的教师
+     * @return
+     */
+    public List<TTeacher> getAllTeachers(){
+        return tTeacherMapper.getAllTeachers();
+    }
+
+    /**
+     * 根据参数查找教师
+     * @param collegeId
+     * @param deptId
+     * @return
+     */
+    public List<TTeacher> getTeachersByCond(Integer collegeId,Integer deptId){
+        AssertUtil.isTrue(collegeId==null||deptId==null,"参数错误");
+        return tTeacherMapper.getTeachersByCond(collegeId,deptId);
     }
 
     /**
@@ -98,7 +121,7 @@ public class TeacherService extends BaseService<TTeacher,Integer> {
      * 1.生成教师编号，检测教师编号是否重复，重复则重新生成
      * 判断是否是外教，如果是外教，首位为L
      * 2.生成教师用户信息，并将教师信息插入教师信息表，教师用户信息插入用户表
-     * 生成教师用户信息，用户名为教师职工编号,初始密码为123456
+     * 生成教师用户信息，用户名为教师职工编号,初始密码为123
      * 3.上传用户个人证件照片
      * @param tTeacher
      */
@@ -203,5 +226,12 @@ public class TeacherService extends BaseService<TTeacher,Integer> {
         int delete_index = tTeacherMapper.deleteByTno(teacherNo);
         int user_update = tUserMapper.deleteUserByUserName(tTeacher.getTeacherNo());
         AssertUtil.isTrue(delete_index<1||user_update<1,"删除失败");
+    }
+
+    public TTeacher getTeacherByName(String teacherName){
+        AssertUtil.isTrue(teacherName==null,"参数错误");
+        TTeacher tTeacher = tTeacherMapper.selTeacherByName(teacherName);
+        AssertUtil.isTrue(tTeacher==null,"记录为空");
+        return tTeacher;
     }
 }

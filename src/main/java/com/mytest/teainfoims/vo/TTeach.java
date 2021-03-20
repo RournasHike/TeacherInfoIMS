@@ -7,6 +7,14 @@ public class TTeach {
 
     private Integer cid;
 
+    private Integer sid;
+
+    private String teacherName;
+
+    private String courseName;
+
+    private String teachRoomName;
+
     private String teachType;
 
     private String teachClassYear;
@@ -16,6 +24,10 @@ public class TTeach {
     private String teachGrade;
 
     private String teachMajor;
+
+    private String startCollege;
+
+    private String startDept;
 
     private Integer prescribedClassHour;
 
@@ -61,6 +73,38 @@ public class TTeach {
         this.cid = cid;
     }
 
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+
+    public String getTeachRoomName() {
+        return teachRoomName;
+    }
+
+    public void setTeachRoomName(String teachRoomName) {
+        this.teachRoomName = teachRoomName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
     public String getTeachType() {
         return teachType;
     }
@@ -99,6 +143,22 @@ public class TTeach {
 
     public void setTeachMajor(String teachMajor) {
         this.teachMajor = teachMajor == null ? null : teachMajor.trim();
+    }
+
+    public String getStartCollege() {
+        return startCollege;
+    }
+
+    public void setStartCollege(String startCollege) {
+        this.startCollege = startCollege == null ? null : startCollege.trim();
+    }
+
+    public String getStartDept() {
+        return startDept;
+    }
+
+    public void setStartDept(String startDept) {
+        this.startDept = startDept == null ? null : startDept.trim();
     }
 
     public Integer getPrescribedClassHour() {

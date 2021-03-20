@@ -5,13 +5,14 @@
     <title>后台管理-课程列表</title>
     <#include "../../../common.ftl">
     <link rel="stylesheet" href="${ctx}/css/teaInfo.css" media="all">
+    <script src="${ctx}/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         //初始化年
         var now = new Date();
         var nowYear = now.getFullYear();
         for (var i = nowYear-20; i <= nowYear + 10; i++) {
             var option = $("<option/>").val(i).text(i);
-            $('#teachClassYear').append(option);
+            $('#classYear').append(option);
         }
     </script>
 </head>
@@ -20,16 +21,19 @@
     <blockquote class="layui-elem-quote quoteBox">
         <form class="layui-form">
             <div class="layui-inline">
-
                 <div class="layui-input-inline">
-                    <select name="classYear" lay-verify="required">
-                        <option value="" disabled>-- 请选择学年 --</option>
-                        <option value=""></option>
+                    <input type="text" name="teacherName"
+                           class="layui-input
+					searchVal" placeholder="教师姓名" />
+                </div>
+                <div class="layui-input-inline">
+                    <select name="classYear" lay-verify="required" id="classYear">
+                        <option value="" selected="selected">-- 请选择学年 --</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
                     <select name="classTerm" lay-verify="required">
-                        <option value="" disabled>-- 请选择学期 --</option>
+                        <option value="" selected="selected">-- 请选择学期 --</option>
                         <option value="第一学期">第一学期</option>
                         <option value="第二学期">第二学期</option>
                     </select>
@@ -40,10 +44,10 @@
         </form>
     </blockquote>
 
-    <table id="teaList" class="layui-table"  lay-filter="courseList"></table>
+    <table id="teachList" class="layui-table"  lay-filter="teachList"></table>
 
     <!--操作-->
-    <script id="teacherListBar" type="text/html">
+    <script id="teachListBar" type="text/html">
         <a class="layui-btn layui-btn-xs" id="edit" lay-event="detail">查看详情</a>
     </script>
 
