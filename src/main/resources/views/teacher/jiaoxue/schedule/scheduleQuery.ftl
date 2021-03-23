@@ -35,9 +35,10 @@
                 }
             }
             var rid=$("#rid").val();
+            var teacherName=$("#teacherName").val();
             $.ajax({
                 type: "GET",
-                url: ctx + "/schedule/scheduleQuery?rid=" + rid,
+                url: ctx + "/schedule/scheduleQuery?rid=" + rid+"&teacherName="+teacherName,
                 dataType: "json",
                 success: function (data) {
                     var content;
@@ -75,6 +76,11 @@
 
     <blockquote class="layui-elem-quote quoteBox">
         <form class="layui-form">
+            <div class="layui-input-inline">
+                <input type="text" name="teacherName" id="teacherName"
+                       class="layui-input
+					searchVal" placeholder="教师姓名" />
+            </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
                     <select name="rid" lay-verify="required" id="rid">
@@ -89,7 +95,7 @@
         </form>
     </blockquote>
 
-    <script type="text/html" id="toolbarDemo">
+<#--    <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
             <a class="layui-btn layui-btn-normal addNews_btn" lay-event="add">
                 <i class="layui-icon">&#xe608;</i>
@@ -103,7 +109,7 @@
         </div>
     </script>
 
-    <table id="schedule" class="layui-table"  lay-filter="schedule"></table>
+    <table id="schedule" class="layui-table"  lay-filter="schedule"></table>-->
 
     <div class="layui-row layui-col-space12">
         <div class="layui-col-md12">

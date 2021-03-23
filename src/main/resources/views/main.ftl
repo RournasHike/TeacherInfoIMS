@@ -274,6 +274,13 @@
                                     <dd>
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3" data-tab="schedule/query" target="_self"><i class="fa fa-exchange"></i><span class="layui-left-nav"> 课表查询</span></a>
                                     </dd>
+
+                                </#if>
+
+                                <#if permissionList?seq_contains("14020")>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3" data-tab="schedule/querys" target="_self"><i class="fa fa-exchange"></i><span class="layui-left-nav"> 我的课表</span></a>
+                                    </dd>
                                 </#if>
                             </dl>
                         </li>

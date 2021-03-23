@@ -10,6 +10,8 @@
     <result column="teach_class_term" property="teachClassTerm" jdbcType="VARCHAR" />
     <result column="teach_grade" property="teachGrade" jdbcType="VARCHAR" />
     <result column="teach_major" property="teachMajor" jdbcType="VARCHAR" />
+    <result column="start_college" property="startCollege" jdbcType="VARCHAR" />
+    <result column="start_dept" property="startDept" jdbcType="VARCHAR" />
     <result column="prescribed_class_hour" property="prescribedClassHour" jdbcType="INTEGER" />
     <result column="actual_class_hour" property="actualClassHour" jdbcType="INTEGER" />
     <result column="actual_teach_class_hour" property="actualTeachClassHour" jdbcType="INTEGER" />
@@ -81,9 +83,9 @@
   </sql>
   <sql id="Base_Column_List" >
     id, tid, cid, teach_type, teach_class_year, teach_class_term, teach_grade, teach_major, 
-    prescribed_class_hour, actual_class_hour, actual_teach_class_hour, actual_experiment_class_hour, 
-    actual_computer_class_hour, actual_other_class_hour, actual_sumup_class_hour, audit_state, 
-    message, remark
+    start_college, start_dept, prescribed_class_hour, actual_class_hour, actual_teach_class_hour, 
+    actual_experiment_class_hour, actual_computer_class_hour, actual_other_class_hour, 
+    actual_sumup_class_hour, audit_state, message, remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mytest.teainfoims.vo.TTeachExample" >
     select
@@ -118,26 +120,26 @@
   <insert id="insert" parameterType="com.mytest.teainfoims.vo.TTeach" >
     insert into t_teach (id, tid, cid, 
       teach_type, teach_class_year, teach_class_term, 
-      teach_grade, teach_major, prescribed_class_hour, 
-      actual_class_hour, actual_teach_class_hour, 
-      actual_experiment_class_hour, actual_computer_class_hour, 
-      actual_other_class_hour, actual_sumup_class_hour, 
-      audit_state, message, remark
-      )
+      teach_grade, teach_major, start_college, 
+      start_dept, prescribed_class_hour, actual_class_hour, 
+      actual_teach_class_hour, actual_experiment_class_hour, 
+      actual_computer_class_hour, actual_other_class_hour, 
+      actual_sumup_class_hour, audit_state, message, 
+      remark)
     values (#{id,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
       #{teachType,jdbcType=VARCHAR}, #{teachClassYear,jdbcType=VARCHAR}, #{teachClassTerm,jdbcType=VARCHAR}, 
-      #{teachGrade,jdbcType=VARCHAR}, #{teachMajor,jdbcType=VARCHAR}, #{prescribedClassHour,jdbcType=INTEGER}, 
-      #{actualClassHour,jdbcType=INTEGER}, #{actualTeachClassHour,jdbcType=INTEGER}, 
-      #{actualExperimentClassHour,jdbcType=INTEGER}, #{actualComputerClassHour,jdbcType=INTEGER}, 
-      #{actualOtherClassHour,jdbcType=INTEGER}, #{actualSumupClassHour,jdbcType=INTEGER}, 
-      #{auditState,jdbcType=BIT}, #{message,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
-      )
+      #{teachGrade,jdbcType=VARCHAR}, #{teachMajor,jdbcType=VARCHAR}, #{startCollege,jdbcType=VARCHAR}, 
+      #{startDept,jdbcType=VARCHAR}, #{prescribedClassHour,jdbcType=INTEGER}, #{actualClassHour,jdbcType=INTEGER}, 
+      #{actualTeachClassHour,jdbcType=INTEGER}, #{actualExperimentClassHour,jdbcType=INTEGER}, 
+      #{actualComputerClassHour,jdbcType=INTEGER}, #{actualOtherClassHour,jdbcType=INTEGER}, 
+      #{actualSumupClassHour,jdbcType=INTEGER}, #{auditState,jdbcType=BIT}, #{message,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mytest.teainfoims.vo.TTeach" >
     insert into t_teach
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        id,
+      id,
       </if>
       <if test="tid != null" >
         tid,
@@ -159,6 +161,12 @@
       </if>
       <if test="teachMajor != null" >
         teach_major,
+      </if>
+      <if test="startCollege != null" >
+        start_college,
+      </if>
+      <if test="startDept != null" >
+        start_dept,
       </if>
       <if test="prescribedClassHour != null" >
         prescribed_class_hour,
@@ -192,7 +200,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+      <if test="id!=null">
         #{id,jdbcType=INTEGER},
       </if>
       <if test="tid != null" >
@@ -215,6 +223,12 @@
       </if>
       <if test="teachMajor != null" >
         #{teachMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="startCollege != null" >
+        #{startCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="startDept != null" >
+        #{startDept,jdbcType=VARCHAR},
       </if>
       <if test="prescribedClassHour != null" >
         #{prescribedClassHour,jdbcType=INTEGER},
@@ -281,6 +295,12 @@
       <if test="record.teachMajor != null" >
         teach_major = #{record.teachMajor,jdbcType=VARCHAR},
       </if>
+      <if test="record.startCollege != null" >
+        start_college = #{record.startCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDept != null" >
+        start_dept = #{record.startDept,jdbcType=VARCHAR},
+      </if>
       <if test="record.prescribedClassHour != null" >
         prescribed_class_hour = #{record.prescribedClassHour,jdbcType=INTEGER},
       </if>
@@ -326,6 +346,8 @@
       teach_class_term = #{record.teachClassTerm,jdbcType=VARCHAR},
       teach_grade = #{record.teachGrade,jdbcType=VARCHAR},
       teach_major = #{record.teachMajor,jdbcType=VARCHAR},
+      start_college = #{record.startCollege,jdbcType=VARCHAR},
+      start_dept = #{record.startDept,jdbcType=VARCHAR},
       prescribed_class_hour = #{record.prescribedClassHour,jdbcType=INTEGER},
       actual_class_hour = #{record.actualClassHour,jdbcType=INTEGER},
       actual_teach_class_hour = #{record.actualTeachClassHour,jdbcType=INTEGER},
@@ -363,6 +385,12 @@
       </if>
       <if test="teachMajor != null" >
         teach_major = #{teachMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="startCollege != null" >
+        start_college = #{startCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="startDept != null" >
+        start_dept = #{startDept,jdbcType=VARCHAR},
       </if>
       <if test="prescribedClassHour != null" >
         prescribed_class_hour = #{prescribedClassHour,jdbcType=INTEGER},
@@ -406,6 +434,8 @@
       teach_class_term = #{teachClassTerm,jdbcType=VARCHAR},
       teach_grade = #{teachGrade,jdbcType=VARCHAR},
       teach_major = #{teachMajor,jdbcType=VARCHAR},
+      start_college = #{startCollege,jdbcType=VARCHAR},
+      start_dept = #{startDept,jdbcType=VARCHAR},
       prescribed_class_hour = #{prescribedClassHour,jdbcType=INTEGER},
       actual_class_hour = #{actualClassHour,jdbcType=INTEGER},
       actual_teach_class_hour = #{actualTeachClassHour,jdbcType=INTEGER},
@@ -418,4 +448,24 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selTeachList" resultType="com.mytest.teainfoims.vo.TTeach" parameterType="com.mytest.teainfoims.query.base.BaseQuery">
+    select tt.*,ts.id sid,tc.course_name courseName,teacher_name teacherName from t_teach tt inner join t_schedule ts on tt.cid=ts.cid and tt.tid=ts.tid inner join t_course tc on tc.id=tt.cid inner join t_teacher t on t.tid=tt.tid
+  </select>
+
+  <select id="selTeachCondList" parameterType="com.mytest.teainfoims.query.TeachQuery" resultType="com.mytest.teainfoims.vo.TTeach">
+    select tt.*,course_name courseName,teacher_name teacherName,teach_room_name teachRoomName from t_course tc inner join t_teach tt on tt.cid=tc.id inner join t_teacher ta on ta.tid=tt.tid inner join t_schedule ts on tt.cid=ts.cid and tt.tid=ts.tid inner join t_teach_room tr on tr.id=ts.rid
+    <where>
+      state = 1
+      <if test="teacherName!=null and teacherName!=''">
+        and teacher_name=#{teacherName}
+      </if>
+      <if test="teachClassYear!=null and teachClassYear!=''">
+        and teach_class_year=#{teachClassYear}
+      </if>
+      <if test="teachClassTerm!=null and teachClassTerm!=''">
+        and teach_class_term=#{teachClassTerm}
+      </if>
+    </where>
+  </select>
 </mapper>

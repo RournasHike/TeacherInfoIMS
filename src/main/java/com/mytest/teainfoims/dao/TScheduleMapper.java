@@ -28,5 +28,5 @@ public interface TScheduleMapper {
 
     int updateByPrimaryKey(TSchedule record);
 
-    List<TSchedule> getScheduleInfoByRid(Integer rid);
+    List<TSchedule> getScheduleInfo(Integer rid,String teacherName);
 }

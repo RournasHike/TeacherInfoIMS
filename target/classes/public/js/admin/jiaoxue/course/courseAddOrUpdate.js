@@ -60,14 +60,15 @@ layui.use(['form', 'layer' ,'upload','jquery','element'], function () {
         console.log(formData);
 
         // 请求的地址
-        var url = ctx + "/course/addCourse"; // 添加操作
+        var url;
 
 
         // 判断用户ID是否为空，如果不为空则为更新操作
-        if ($("#hid").val()) {
-            var id=$("#id").val();
+        if ($("[name='id']").val()) {
             // 更新操作
-            url = ctx + "/honor/updateCourse?id="+id;
+            url = ctx + "/course/updateCourse";
+        }else{
+            url = ctx + "/course/addCourse"; // 添加操作
         }
 
 

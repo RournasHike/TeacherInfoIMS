@@ -561,8 +561,30 @@
     </where>
   </select>
 
+  <select id="getTeachersByCond" resultType="com.mytest.teainfoims.vo.TTeacher">
+    select * from t_teacher
+    <where>
+      1=1
+      <if test="deptId!=null">
+        and deptid=#{deptId}
+      </if>
+      <if test="collegeId!=null">
+        and collegeid=#{collegeId}
+      </if>
+    </where>
+  </select>
 
+  <select id="selTeacherByName" resultType="com.mytest.teainfoims.vo.TTeacher" parameterType="string">
+    select * from t_teacher
+    <where>
+      <if test="teacherName!=null and teacherName!=''">
+        teacher_name=#{teacherName}
+      </if>
+    </where>
+  </select>
 
-
+  <select id="getAllTeachers" resultType="com.mytest.teainfoims.vo.TTeacher">
+    select * from t_teacher
+  </select>
 
 </mapper>

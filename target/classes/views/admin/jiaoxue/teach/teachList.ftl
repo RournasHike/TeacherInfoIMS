@@ -25,8 +25,9 @@
     <table id="teachList" class="layui-table" lay-filter="teachList"></table>
 
     <!--操作-->
-    <script id="teacherListBar" type="text/html">
-        <a class="layui-btn layui-btn-xs" id="edit" lay-event="audit">审核</a>
+    <script id="teachListBar" type="text/html">
+        <a class="layui-btn layui-btn-xs" id="edit" lay-event="edit">授课调整</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" id="del" lay-event="del">删除</a>
     </script>
 
 

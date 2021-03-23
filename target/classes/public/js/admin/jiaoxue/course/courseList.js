@@ -48,7 +48,7 @@ layui.use(['table','layer',"form"],function(){
             console.log(data.config.id);
             var checkStatus = table.checkStatus(data.config.id);
             // 打开客户订单的对话框（传递选中的数据记录）
-            openCourseDialog(checkStatus.data);
+            openCourseDialog(checkStatus.data[0].id);
 
         }
 
@@ -70,6 +70,10 @@ layui.use(['table','layer',"form"],function(){
 
             // 删除客户
             deleteCourse(data.data.id);
+        } else if (data.event == "courseDetail"){
+
+            //打开课程详情
+            openCourseDialog(data.data.id);
         }
 
     });
@@ -117,7 +121,7 @@ layui.use(['table','layer',"form"],function(){
             // 发送ajax请求，删除记录
             $.ajax({
                 type:"post",
-                url:ctx + "/course/delCourse",
+                url:ctx + "/course/deleteCourse",
                 data:{
                     id:id
                 },
@@ -162,12 +166,10 @@ layui.use(['table','layer',"form"],function(){
             // 宽高
             area: ['700px', '500px'],
             // url地址
-            content: ctx + "/course/toCourseDetail?hid=" + data,
+            content: ctx + "/course/toCourseDetail?id=" + data,
             // 可以最大化与最小化
             maxmin:true
         });
 
     }
-
-
 });

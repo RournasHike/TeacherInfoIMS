@@ -34,9 +34,15 @@ public class ScheduleController extends BaseController {
         return "admin/jiaoxue/schedule/scheduleQuery";
     }
 
+    @RequestMapping("querys")
+    public String querysSchedule(Model model){
+        model.addAttribute("teachRooms",teachRoomService.getAllTeachRooms());
+        return "teacher/jiaoxue/schedule/scheduleQuery";
+    }
+
     @RequestMapping("scheduleQuery")
     @ResponseBody
-    public List<TSchedule> scheduleQuery(Integer rid){
-        return scheduleService.getScheduleInfoByRid(rid);
+    public List<TSchedule> scheduleQuery(Integer rid,String teacherName){
+        return scheduleService.getScheduleInfoByRid(rid,teacherName);
     }
 }

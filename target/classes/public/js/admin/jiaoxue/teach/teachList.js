@@ -7,7 +7,7 @@ layui.use(['table','layer',"form"],function(){
     // 客户列表展示
     var  tableIns = table.render({
         elem: '#teachList',
-        url : ctx+'/honor/honorList',
+        url : ctx+'/teach/teachList',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -17,15 +17,17 @@ layui.use(['table','layer',"form"],function(){
         id : "teachList",
         cols : [[
             {type: "checkbox", fixed:"center"},
-            {field: "hid", title:'编号',fixed:"true"},
-            {field: 'hno', title: '荣誉编号',align:"center"},
-            {field: 'teacherName', title: '教师姓名',  align:'center'},
-            {field: 'hname', title: '荣誉名称', align:'center'},
-            {field: 'participants', title: '参与人', align:'center'},
-            {field: 'hdate', title: '获奖时间',  align:'center'},
-            {field: 'hcompany', title: '颁奖单位',  align:'center'},
-            {field: 'hdepartment', title: '授予单位',  align:'center'},
-            {title:'操作',templet:'#honorListBar', fixed: 'right', align:'center', minWidth:300}
+            {field: "id", title:'编号',fixed:"true"},
+            {field: "sid", title:'课表编号',fixed:"true"},
+            {field: "courseName", title:'课程名称',fixed:"true"},
+            {field: 'teacherName', title: '教师姓名',align:"center"},
+            {field: 'teachClassYear', title: '教学学年',  align:'center'},
+            {field: 'teachClassTerm', title: '教学学期', align:'center'},
+            {field: 'teachGrade', title: '授课年级', align:'center'},
+            {field: 'teachMajor', title: '授课专业',  align:'center'},
+            {field: 'startCollege', title: '开课学院',  align:'center'},
+            {field: 'startDept', title: '开课系部',  align:'center'},
+            {title:'操作',templet:'#teachListBar', fixed: 'right', align:'center', minWidth:300}
         ]]
     });
 
@@ -61,36 +63,61 @@ layui.use(['table','layer',"form"],function(){
     /**
      * 监听行工具栏
      */
-    table.on('tool(honorList)', function (data) {
+    table.on('tool(teachList)', function (data) {
 
         if (data.event == "edit") { // 更新客户信息
 
-            console.log(data.data.hid);
+            // console.log(data.data.hid);
             // 打开添加/修改客户信息的对话框
-            openAddOrUpdateHonorDialog(data.data.hid);
+            openAddOrUpdateTeachDialog(data.data.id,data.data.sid);
 
-        } else if (data.event == "honorDetail") { // 删除客户信息
+        } else if (data.event == "del") { // 删除客户信息
 
             // 删除客户
-            openHonorDialog(data.data.hid);
+            deleteTeach(data.data.id,data.data.sid);
         }
 
     });
+
+
+    function deleteTeach(id,sid) {
+        // 弹出确认框，询问用户是否确认删除
+        layer.confirm('确定要删除该记录吗？',{icon:3, title:"授课信息管理"}, function (index) {
+            // 关闭确认框
+            layer.close(index);
+
+            // 发送ajax请求，删除记录
+            $.ajax({
+                type:"post",
+                url:ctx + "/teach/delTeach",
+                data:{
+                    id:id,
+                    sid:sid
+                },
+                success:function (result) {
+                    // 判断删除结果
+                    if (result.code == 200) {
+                        // 提示成功
+                        layer.msg("删除成功！",{icon:6});
+                        // 刷新表格
+                        tableIns.reload();
+                    } else {
+                        // 提示失败
+                        layer.msg(result.msg, {icon:5});
+                    }
+                }
+            });
+        });
+    }
 
 
 
     /**
      * 打开添加/修改客户信息的对话框
      */
-    function openAddOrUpdateHonorDialog(id) {
-        var title = "<h3>荣誉信息管理 - 添加荣誉信息</h3>";
-        var url = ctx + "/honor/toAddOrUpdateHonorPage";
-
-        // 判断id是否为空 （如果不为空，则为更新操作）
-        if (id != null && id != '') {
-            title = "<h3>荣誉信息管理 - 更新荣誉信息</h3>";
-            url = ctx + "/honor/toAddOrUpdateHonorPage?hid=" + id;
-        }
+    function openAddOrUpdateTeachDialog(tid,sid) {
+        var title = "<h3>授课信息管理 - 更新授课信息</h3>";
+        var url = ctx + "/teach/UpdateTeachPage?tid=" + tid+"&sid="+sid;
 
         // iframe层
         layui.layer.open({
@@ -111,7 +138,7 @@ layui.use(['table','layer',"form"],function(){
      * 打开指定客户的订单对话框
      * @param data
      */
-    function openHonorDialog(data) {
+    function openTeachDialog(data) {
         // 判断用户是否选择客户
         if (data.length == 0) {
             layer.msg("请选择想要查看的教师！",{icon:5});
@@ -130,11 +157,11 @@ layui.use(['table','layer',"form"],function(){
             // 类型
             type: 2,
             // 标题
-            title: "<h3>荣誉信息管理 - 查看荣誉详细信息</h3>",
+            title: "<h3>授课信息管理 - 查看授课详细信息</h3>",
             // 宽高
             area: ['700px', '500px'],
             // url地址
-            content: ctx + "/honor/toHonorDetail?hid=" + data,
+            content: ctx + "/teach/toTeachDetail?id=" + data,
             // 可以最大化与最小化
             maxmin:true
         });

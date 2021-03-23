@@ -6,26 +6,27 @@ layui.use(['table','layer',"form"],function(){
 
     // 客户列表展示
     var  tableIns = table.render({
-        elem: '#teaList',
-        url : ctx+'/tea/list',
+        elem: '#teachList',
+        url : ctx+'/teach/teachCondList',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
         limit : 10,
         toolbar: "#toolbarDemo",
-        id : "teaList",
+        id : "teachList",
         cols : [[
             {type: "checkbox", fixed:"center"},
-            {field: "tid", title:'编号',fixed:"true"},
-            {field: 'teacherNo', title: '教师编号',align:"center"},
+            {field: "id", title:'编号',fixed:"true"},
+            {field: 'courseName', title: '课程名称',  align:'center'},
             {field: 'teacherName', title: '教师姓名',  align:'center'},
-            {field: 'sex', title: '性别', align:'center'},
-            {field: 'phone', title: '电话号码', align:'center'},
-            {field: 'major', title: '所学专业',  align:'center'},
-            {field: 'school', title: '教育背景',  align:'center'},
-            {field: 'degree', title: '学历背景',  align:'center'},
-            {title:'操作',templet:'#teacherListBar', fixed: 'right', align:'center', minWidth:150}
+            {field: 'teachRoomName', title: '授课地点', align:'center'},
+            {field: 'teachType', title: '授课方式', align:'center'},
+            {field: 'teachClassYear', title: '授课学年',  align:'center'},
+            {field: 'teachClassTerm', title: '授课学期',  align:'center'},
+            {field: 'teachGrade', title: '授课年级',  align:'center'},
+            {field: 'teachMajor', title: '授课专业',  align:'center'},
+            {title:'操作',templet:'#teachListBar', fixed: 'right', align:'center', minWidth:150}
         ]]
     });
 
@@ -43,9 +44,10 @@ layui.use(['table','layer',"form"],function(){
             // 设置需要传递给后端的参数
             where: { //设定异步数据接口的额外参数，任意设
                 // 通过文本框，设置传递的参数
-                teacherName: $("[name='name']").val() // 客户名称
-                ,collegeId: $("[name='college']").val() // 客户编号
-                ,deptId:$("[name='xibu']").val() // 客户级别
+                // 通过文本框，设置传递的参数
+                teacherName:$("[name='teacherName']").val()
+                ,classYear: $("[name='classYear']").val() // 客户编号
+                ,classTerm:$("[name='classTerm']").val() // 客户级别
             }
             ,page: {
                 curr: 1 // 重新从第 1 页开始
@@ -55,33 +57,11 @@ layui.use(['table','layer',"form"],function(){
     });
 
 
-    /**
-     * 监听头部工具栏
-     */
-    table.on('toolbar(teaList)', function (data) {
-
-        if (data.event == "add") { // 添加客户信息
-
-            // 打开添加/修改客户信息的对话框
-            openAddOrUpdateTeaDialog();
-
-        } else if (data.event == "teaDetail") { // 客户的订单数据查看
-            // 获取被选中的数据的相关信息
-            console.log(data.config.id);
-            var checkStatus = table.checkStatus(data.config.id);
-            // 打开客户订单的对话框（传递选中的数据记录）
-            openTeaDialog(checkStatus.data);
-
-        }
-
-    });
-
-
 
     /**
      * 监听行工具栏
      */
-    table.on('tool(teaList)', function (data) {
+    table.on('tool(teachList)', function (data) {
 
         if (data.event == "edit") { // 更新客户信息
 

@@ -161,4 +161,12 @@
     set teach_room_name = #{teachRoomName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getAllTeachRoom" resultType="com.mytest.teainfoims.vo.TTeachRoom">
+    select * from t_teach_room
+  </select>
+
+  <select id="selTeachRoomByName" resultType="com.mytest.teainfoims.vo.TTeachRoom" parameterType="string">
+    select * from t_teach_room where teach_room_name=#{teachRoomName}
+  </select>
 </mapper>
