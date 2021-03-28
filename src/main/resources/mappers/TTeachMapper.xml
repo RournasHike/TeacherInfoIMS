@@ -468,4 +468,105 @@
       </if>
     </where>
   </select>
+
+  <update id="updateTTeachInfoByTidAndCid" parameterType="com.mytest.teainfoims.vo.TTeach" >
+    update t_teach
+    <set >
+
+      <if test="teachType != null" >
+        teach_type = #{teachType,jdbcType=VARCHAR},
+      </if>
+      <if test="teachClassYear != null" >
+        teach_class_year = #{teachClassYear,jdbcType=VARCHAR},
+      </if>
+      <if test="teachClassTerm != null" >
+        teach_class_term = #{teachClassTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="teachGrade != null" >
+        teach_grade = #{teachGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="teachMajor != null" >
+        teach_major = #{teachMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="startCollege != null" >
+        start_college = #{startCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="startDept != null" >
+        start_dept = #{startDept,jdbcType=VARCHAR},
+      </if>
+      <if test="prescribedClassHour != null" >
+        prescribed_class_hour = #{prescribedClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualClassHour != null" >
+        actual_class_hour = #{actualClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualTeachClassHour != null" >
+        actual_teach_class_hour = #{actualTeachClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualExperimentClassHour != null" >
+        actual_experiment_class_hour = #{actualExperimentClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualComputerClassHour != null" >
+        actual_computer_class_hour = #{actualComputerClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualOtherClassHour != null" >
+        actual_other_class_hour = #{actualOtherClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="actualSumupClassHour != null" >
+        actual_sumup_class_hour = #{actualSumupClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        audit_state = #{auditState,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER} and cid = #{cid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selClassHourList" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="com.mytest.teainfoims.query.base.BaseQuery">
+    select tt.id id,tt.*,tc.* from t_teach tt inner join t_course tc on tt.cid=tc.id
+  </select>
+
+  <select id="selAuditClassHourList" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="com.mytest.teainfoims.query.base.BaseQuery">
+    select tt.id id,tt.*,tc.* from t_teach tt inner join t_course tc on tt.cid=tc.id where audit_state is null
+  </select>
+
+  <select id="selClassHourById" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="int">
+    select *,tea.teacher_name teacherName from t_teach tt inner join t_course tc on tt.cid=tc.id inner join t_teacher tea on tea.tid=tt.tid
+    <where>
+      <if test="id!=null">
+        tt.id=#{id}
+      </if>
+    </where>
+  </select>
+
+  <select id="selAuditClassHourById" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="int">
+    select *,tea.teacher_name teacherName from t_teach tt inner join t_course tc on tt.cid=tc.id inner join t_teacher tea on tea.tid=tt.tid
+    <where>
+      audit_state is null and actual_class_hour is not null
+      <if test="id!=null">
+        and tt.id=#{id}
+      </if>
+    </where>
+  </select>
+
+  <select id="selTeacherCondClassHour" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="com.mytest.teainfoims.query.ClassHourQuery">
+    select *,tea.teacher_name teacherName from t_teach tt inner join t_course tc on tt.cid=tc.id inner join t_teacher tea on tea.tid=tt.tid
+    <where>
+      <if test="teacherName!=null and teacherName!=''">
+        teacher_name = #{teacherName}
+      </if>
+      <if test="classYear!=null and classYear!=''">
+        and teach_class_year = #{classYear}
+      </if>
+      <if test="classTerm!=null and classTerm!=''">
+        and teach_class_term = #{classTerm}
+      </if>
+    </where>
+  </select>
 </mapper>

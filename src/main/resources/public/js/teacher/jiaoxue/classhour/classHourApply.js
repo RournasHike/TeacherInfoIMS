@@ -5,56 +5,12 @@ layui.use(['form', 'layer' ,'upload','jquery','element','formSelects'], function
     var upload = layui.upload, $ = layui.jquery, element = layui.element;
     var formSelects = layui.formSelects;
 
-    /*文件上传*/
-    upload.render({
-        accept : "file",
-        elem : "#addFile",
-        auto : false,   //关闭文件自动上传
-        bindAction : "#upload", //文件上传触发按钮
-        url : ctx+"/upload",
-        progress:function(value){//上传进度回调 value进度值
-            element.progress('uploadProgressBar', value+'%')//设置页面进度条
-        },
-        before : function (obj) {
-            /* var intId = setInterval(function () {
-                 getUploadStatus(intId);
-             }, 1000); //每秒向服务端获取一次当前上传进度情况*/
-            obj.preview(function (index,file,result) {
-                $('#demo1').attr('src',result);
-            })
-        },
-        done : function (res, index, upload) {
-            if(res.code != 200){
-                layer.open({
-                    icon : 2,
-                    skin : "layui-layer-molv",
-                    content : res.msg
-                });
-            }
-            if (res.code<0){
-                layer.msg("上传失败")
-            }
-            layer.msg('上传成功');
-            $("#photoUrl").val(res.filePath);
-        },
-        error : function (res) {
-
-        }
-    });
-
-
 
     /**
      * 表单Submit监听
      */
-    form.on('submit(addOrUpdateUser)', function (data) {
+    form.on('submit(updateClassHour)', function (data) {
 
-        var isForeign;
-        if($("input:radio:checked").val().toString()=="1"){
-            isForeign=true;
-        }else if ($("input:radio:checked").val().toString()=="0"){
-            isForeign=false;
-        }
         // 提交数据时的加载层 （https://layer.layui.com/）
         var index = top.layer.msg("数据提交中,请稍后...",{
             icon:16, // 图标
@@ -67,14 +23,7 @@ layui.use(['form', 'layer' ,'upload','jquery','element','formSelects'], function
         console.log(formData);
 
         // 请求的地址
-        var url = ctx + "/tea/addTeacher?isForeign="+isForeign; // 添加操作
-
-
-        // 判断用户ID是否为空，如果不为空则为更新操作
-        if ($("[name='id']").val()) {
-            // 更新操作
-            var url = ctx + "/tea/updateTeacher";
-        }
+        var url = ctx + "/classHour/addClassHour"; // 添加操作
 
 
         $.post(url, formData, function (result) {

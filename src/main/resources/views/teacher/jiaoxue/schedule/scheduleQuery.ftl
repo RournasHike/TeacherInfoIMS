@@ -6,6 +6,18 @@
     <#include "../../../common.ftl">
     <link rel="stylesheet" href="${ctx}/css/teaInfo.css" media="all">
     <script type="application/javascript" src="${ctx}/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            //初始化年份
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var option;
+            for (var i = nowYear - 20; i <= nowYear + 10; i++) {
+                option = $("<option/>").val(i+"-"+(i+1)+"学年").text(i+"-"+(i+1)+"学年");
+                $('#classYear').append(option);
+            }
+        });
+    </script>
     <script type="application/javascript">
 
         var weekJson={
@@ -35,10 +47,16 @@
                 }
             }
             var rid=$("#rid").val();
-            var teacherName=$("#teacherName").val();
+            var classYear=$("#classYear").val();
+            var classTerm=$("#classTerm").val();
             $.ajax({
                 type: "GET",
-                url: ctx + "/schedule/scheduleQuery?rid=" + rid+"&teacherName="+teacherName,
+                url: ctx + "/schedule/scheduleQuery",
+                data: {
+                    rid: rid,
+                    classYear: classYear,
+                    classTerm: classTerm,
+                },
                 dataType: "json",
                 success: function (data) {
                     var content;
@@ -76,10 +94,18 @@
 
     <blockquote class="layui-elem-quote quoteBox">
         <form class="layui-form">
+
             <div class="layui-input-inline">
-                <input type="text" name="teacherName" id="teacherName"
-                       class="layui-input
-					searchVal" placeholder="教师姓名" />
+                <select name="classYear" lay-verify="required" id="classYear">
+                    <option value="" selected="selected">-- 请选择学年 --</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="classTerm" lay-verify="required" id="classTerm">
+                    <option value="" selected="selected">-- 请选择学期 --</option>
+                    <option value="第一学期">第一学期</option>
+                    <option value="第二学期">第二学期</option>
+                </select>
             </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">

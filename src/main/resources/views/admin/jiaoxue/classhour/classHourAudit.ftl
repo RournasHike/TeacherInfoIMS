@@ -13,33 +13,33 @@
         <hr style="color: #000"/>
     </div>
     <div class="layui-row layui-col-space10">
+
         <div class="layui-col-md9">
-            <div class="piddiv" style="display: none"><input type="hidden" id="paid" name="paid" value="${(paper.paid)!""}"></div>
             <table cellpadding="2px" cellspacing="4px" style="text-align: center" border="1px solid black" class="layui-table">
                 <tr style="height: 35px">
                     <td class="leftcell"><label>教师姓名:</label></td>
-                    <td class="rightcell">${(teach.pano)!""}</td>
+                    <td class="rightcell">${(classHour.teacherName)!""}</td>
                     <td class="leftcell"><label>教授课程:</label></td>
-                    <td class="rightcell">${(teach.paname)!""}</td>
+                    <td class="rightcell">${(classHour.courseName)!""}</td>
                 </tr>
 
                 <tr>
                     <td class="leftcell"><label>讲授学时:</label></td>
-                    <td class="rightcell">${(course.teachClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.teachClassHour)!""}</td>
                     <td class="leftcell"><label>实验学时:</label></td>
-                    <td class="rightcell">${(course.experimentClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.experimentClassHour)!""}</td>
                 </tr>
                 <tr>
                     <td class="leftcell"><label>上机学时:</label></td>
-                    <td class="rightcell">${(course.computerClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.computerClassHour)!""}</td>
                     <td class="leftcell"><label>其他学时:</label></td>
-                    <td class="rightcell">${(course.otherClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.otherClassHour)!""}</td>
                 </tr>
                 <tr>
                     <td class="leftcell"><label>规定学时:</label></td>
-                    <td class="rightcell">${(teach.letternum)!}</td>
+                    <td class="rightcell">${(classHour.prescribedClassHour)!}</td>
                     <td class="leftcell"><label>实际学时:</label></td>
-                    <td class="rightcell">${(teach.letternum)!}</td>
+                    <td class="rightcell">${(classHour.actualClassHour)!}</td>
                 </tr>
 
 
@@ -51,24 +51,25 @@
 
                 <tr>
                     <td class="leftcell"><label>实际讲授学时:</label></td>
-                    <td class="rightcell">${(course.actualTeachClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.actualTeachClassHour)!""}</td>
                     <td class="leftcell"><label>实际实验学时:</label></td>
-                    <td class="rightcell">${(course.actualExperimentClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.actualExperimentClassHour)!""}</td>
                 </tr>
                 <tr>
                     <td class="leftcell"><label>实际上机学时:</label></td>
-                    <td class="rightcell">${(course.actualComputerClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.actualComputerClassHour)!""}</td>
                     <td class="leftcell"><label>实际其他学时:</label></td>
-                    <td class="rightcell">${(course.actualOtherClassHour)!""}</td>
+                    <td class="rightcell">${(classHour.actualOtherClassHour)!""}</td>
                 </tr>
 
                 <tr>
                     <td colspan="2" style="text-align: center;" class="leftcell">总学时:</td>
-                    <td colspan="2" style="text-align: center;" class="rightcell">${(course.actualOtherClassHour)!""}</td>
+                    <td colspan="2" style="text-align: center;" class="rightcell">${(classHour.actualSumupClassHour)!""}</td>
                 </tr>
             </table>
         </div>
         <form class="layui-form" style="width:80%;">
+            <input name="id" type="hidden" value="${(classHour.id)!}"/>
             <div class="layui-form-item layui-row layui-col-xs12">
                 <label class="layui-form-label">是否通过：</label>
                 <div class="layui-input-block">
@@ -85,7 +86,7 @@
             <div class="layui-form-item layui-row layui-col-xs12">
                 <div class="layui-input-block">
                     <button class="layui-btn layui-btn-lg" lay-submit=""
-                            lay-filter="addOrUpdatePaper">确认
+                            lay-filter="addOrUpdateClassHour">确认
                     </button>
                     <button class="layui-btn layui-btn-lg layui-btn-normal" id="closeBtn">取消</button>
                 </div>

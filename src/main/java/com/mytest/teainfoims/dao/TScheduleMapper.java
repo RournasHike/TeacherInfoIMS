@@ -1,5 +1,6 @@
 package com.mytest.teainfoims.dao;
 
+import com.mytest.teainfoims.query.ScheduleQuery;
 import com.mytest.teainfoims.vo.TSchedule;
 import com.mytest.teainfoims.vo.TScheduleExample;
 import java.util.List;
@@ -28,5 +29,5 @@ public interface TScheduleMapper {
 
     int updateByPrimaryKey(TSchedule record);
 
-    List<TSchedule> getScheduleInfo(Integer rid,String teacherName);
+    List<TSchedule> getScheduleInfo(ScheduleQuery scheduleQuery);
 }

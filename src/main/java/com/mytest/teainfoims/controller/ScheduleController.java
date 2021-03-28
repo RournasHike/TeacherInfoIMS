@@ -1,6 +1,7 @@
 package com.mytest.teainfoims.controller;
 
 import com.mytest.teainfoims.controller.base.BaseController;
+import com.mytest.teainfoims.query.ScheduleQuery;
 import com.mytest.teainfoims.service.ScheduleService;
 import com.mytest.teainfoims.service.TeachRoomService;
 import com.mytest.teainfoims.utils.AssertUtil;
@@ -42,7 +43,7 @@ public class ScheduleController extends BaseController {
 
     @RequestMapping("scheduleQuery")
     @ResponseBody
-    public List<TSchedule> scheduleQuery(Integer rid,String teacherName){
-        return scheduleService.getScheduleInfoByRid(rid,teacherName);
+    public List<TSchedule> scheduleQuery(ScheduleQuery scheduleQuery){
+        return scheduleService.getScheduleInfo(scheduleQuery);
     }
 }

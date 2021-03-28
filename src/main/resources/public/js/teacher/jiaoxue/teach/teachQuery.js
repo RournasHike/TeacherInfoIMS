@@ -25,8 +25,7 @@ layui.use(['table','layer',"form"],function(){
             {field: 'teachClassYear', title: '授课学年',  align:'center'},
             {field: 'teachClassTerm', title: '授课学期',  align:'center'},
             {field: 'teachGrade', title: '授课年级',  align:'center'},
-            {field: 'teachMajor', title: '授课专业',  align:'center'},
-            {title:'操作',templet:'#teachListBar', fixed: 'right', align:'center', minWidth:150}
+            {field: 'teachMajor', title: '授课专业',  align:'center'}
         ]]
     });
 

@@ -8,12 +8,17 @@
     <script src="${ctx}/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         //初始化年
-        var now = new Date();
-        var nowYear = now.getFullYear();
-        for (var i = nowYear-20; i <= nowYear + 10; i++) {
-            var option = $("<option/>").val(i).text(i);
-            $('#classYear').append(option);
-        }
+        $(function () {
+            //初始化年份
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var option;
+            for (var i = nowYear - 20; i <= nowYear + 10; i++) {
+                option = $("<option/>").val(i+"-"+(i+1)+"学年").text(i+"-"+(i+1)+"学年");
+                $('#classYear').append(option);
+            }
+        })
+
     </script>
 </head>
 <body>
@@ -21,11 +26,6 @@
     <blockquote class="layui-elem-quote quoteBox">
         <form class="layui-form">
             <div class="layui-inline">
-                <div class="layui-input-inline">
-                    <input type="text" name="teacherName"
-                           class="layui-input
-					searchVal" placeholder="教师姓名" />
-                </div>
                 <div class="layui-input-inline">
                     <select name="classYear" lay-verify="required" id="classYear">
                         <option value="" selected="selected">-- 请选择学年 --</option>
@@ -47,9 +47,9 @@
     <table id="teachList" class="layui-table"  lay-filter="teachList"></table>
 
     <!--操作-->
-    <script id="teachListBar" type="text/html">
+<#--    <script id="teachListBar" type="text/html">
         <a class="layui-btn layui-btn-xs" id="edit" lay-event="detail">查看详情</a>
-    </script>
+    </script>-->
 
 
 </form>

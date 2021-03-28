@@ -26,8 +26,7 @@ layui.use(['table','layer',"form"],function(){
             {field: 'experimentClassHour', title: '实验学时',  align:'center'},
             {field: 'computerClassHour', title: '上机学时',  align:'center'},
             {field: 'otherClassHour', title: '其他学时',  align:'center'},
-            {field: 'credit', title: '学分',  align:'center'},
-            {title:'操作',templet:'#teacherListBar', fixed: 'right', align:'center', minWidth:150}
+            {field: 'credit', title: '学分',  align:'center'}
         ]]
     });
 

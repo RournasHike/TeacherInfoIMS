@@ -1,5 +1,7 @@
 package com.mytest.teainfoims.dao;
 
+import com.mytest.teainfoims.entity.ClassHourEntity;
+import com.mytest.teainfoims.query.ClassHourQuery;
 import com.mytest.teainfoims.query.TeachQuery;
 import com.mytest.teainfoims.query.base.BaseQuery;
 import com.mytest.teainfoims.vo.TTeach;
@@ -33,4 +35,16 @@ public interface TTeachMapper {
     List<TTeach> selTeachList(BaseQuery query);
 
     List<TTeach> selTeachCondList(TeachQuery query);
+
+    int updateTTeachInfoByTidAndCid(TTeach tTeach);
+
+    List<ClassHourEntity> selClassHourList(BaseQuery query);
+
+    ClassHourEntity selClassHourById(Integer id);
+
+    ClassHourEntity selAuditClassHourById(Integer id);
+
+    List<ClassHourEntity> selAuditClassHourList(BaseQuery query);
+
+    List<ClassHourEntity> selTeacherCondClassHour(ClassHourQuery classHourQuery);
 }
