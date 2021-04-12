@@ -321,15 +321,25 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getScheduleInfo" parameterType="int" resultType="com.mytest.teainfoims.vo.TSchedule">
+  <select id="getScheduleInfo" parameterType="com.mytest.teainfoims.query.ScheduleQuery" resultType="com.mytest.teainfoims.vo.TSchedule" >
     select *,tt.teacher_name teacherName,tc.course_name courseName,teach_room_name teachRoomName from t_schedule ts inner join t_course tc on tc.id=ts.cid inner join t_teacher tt on tt.tid=ts.tid inner join t_teach_room tr on tr.id=ts.rid
     <where>
+      1=1
       <if test="rid!=null">
-        rid=#{rid}
+        and rid=#{rid}
       </if>
       <if test="teacherName!=null and teacherName!=''">
-        teacherName=#{teacherName}
+        and teacherName=#{teacherName}
       </if>
+
+      <if test="classYear!=null and classYear!=''">
+        and class_year=#{classYear}
+      </if>
+
+      <if test="classTerm!=null and classTerm!=''">
+        and class_term=#{classTerm}
+      </if>
+
     </where>
   </select>
 </mapper>

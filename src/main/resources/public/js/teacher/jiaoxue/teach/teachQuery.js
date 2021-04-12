@@ -44,9 +44,8 @@ layui.use(['table','layer',"form"],function(){
             where: { //设定异步数据接口的额外参数，任意设
                 // 通过文本框，设置传递的参数
                 // 通过文本框，设置传递的参数
-                teacherName:$("[name='teacherName']").val()
-                ,classYear: $("[name='classYear']").val() // 客户编号
-                ,classTerm:$("[name='classTerm']").val() // 客户级别
+                teachClassYear: $("[name='teachClassYear']").val()
+                ,teachClassTerm:$("[name='teachClassTerm']").val()
             }
             ,page: {
                 curr: 1 // 重新从第 1 页开始

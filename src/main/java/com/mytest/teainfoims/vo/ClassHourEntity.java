@@ -1,4 +1,4 @@
-package com.mytest.teainfoims.entity;
+package com.mytest.teainfoims.vo;
 
 import javax.validation.constraints.*;
 

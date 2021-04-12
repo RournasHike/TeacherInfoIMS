@@ -77,7 +77,16 @@
             </table>
         </div>
         <div class="layui-col-md3" style="text-align: center;vertical-align: center">
-            <img src="${ctx}/${(tea.photoUrl)!}" alt="个人证件照" style="width: 150px; height: 220px;"/>
+            <#assign photoUrl="${(tea.photoUrl)!}"/>
+            <#if photoUrl??>
+                    <img src="${ctx}/${(tea.photoUrl)!}" alt="个人证件照" style="width: 150px; height: 220px;"/>
+                <#else >
+                    <button type="button" class="layui-btn" id="addFile">
+                        <i class="layui-icon">&#xe67c;</i>添加文件
+                    </button>
+                    <button type="button" class="layui-btn" id="upload">上传</button>
+                    <input type="hidden" name="photoUrl" value="" id="photo"/>
+            </#if>
         </div>
     </div>
 </div>

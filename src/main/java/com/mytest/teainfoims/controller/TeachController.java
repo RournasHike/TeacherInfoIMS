@@ -6,15 +6,15 @@ import com.mytest.teainfoims.query.TeachQuery;
 import com.mytest.teainfoims.query.base.BaseQuery;
 import com.mytest.teainfoims.service.*;
 import com.mytest.teainfoims.utils.AssertUtil;
+import com.mytest.teainfoims.utils.LoginUserUtil;
 import com.mytest.teainfoims.vo.*;
-import com.sun.org.apache.regexp.internal.RE;
-import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -46,6 +46,9 @@ public class TeachController extends BaseController {
 
     @Resource
     private CourseService courseService;
+
+    @Resource
+    private UserService userService;
 
     @RequestMapping("assign")
     public String assignTeach(Model model){
@@ -151,7 +154,10 @@ public class TeachController extends BaseController {
 
     @RequestMapping("teachCondList")
     @ResponseBody
-    public Map<String,Object> getTeachCondList(TeachQuery query){
+    public Map<String,Object> getTeachCondList(TeachQuery query, HttpServletRequest request){
+        int userId = LoginUserUtil.releaseUserIdFromCookie(request);
+        TUser tUser = userService.selectByPrimaryKey(userId);
+        query.setTeacherName(tUser.getUsertruename());
         return teachService.getTeachInfoByCond(query);
     }
 

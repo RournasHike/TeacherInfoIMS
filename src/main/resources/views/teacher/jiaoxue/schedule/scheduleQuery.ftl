@@ -51,9 +51,8 @@
             var classTerm=$("#classTerm").val();
             $.ajax({
                 type: "GET",
-                url: ctx + "/schedule/scheduleQuery",
+                url: ctx + "/schedule/scheduleTeaQuery",
                 data: {
-                    rid: rid,
                     classYear: classYear,
                     classTerm: classTerm,
                 },
@@ -108,14 +107,6 @@
                 </select>
             </div>
             <div class="layui-inline">
-                <div class="layui-input-inline">
-                    <select name="rid" lay-verify="required" id="rid">
-                        <option value="" selected="selected">-- 请选择教研室 --</option>
-                        <#list teachRooms as key>
-                            <option value="${key_index+1}">${key.teachRoomName!""}</option>
-                        </#list>
-                    </select>
-                </div>
                 <a class="layui-btn search_btn" onclick="querySchedule()"><i class="layui-icon">&#xe615;</i> 搜索</a>
             </div>
         </form>

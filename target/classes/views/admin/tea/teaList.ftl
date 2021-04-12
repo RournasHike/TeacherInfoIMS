@@ -49,6 +49,11 @@
                 查看详细信息
             </a>
 
+            <a class="layui-btn layui-btn-normal  " lay-event="patchDataImport">
+                <i class="layui-icon">&#xe608;</i>
+                批量数据导入
+            </a>
+
         </div>
     </script>
 

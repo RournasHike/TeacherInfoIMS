@@ -1,4 +1,4 @@
-package com.mytest.teainfoims.mail;
+package com.mytest.teainfoims.service.mail;
 
 import javax.mail.MessagingException;
 

@@ -6,8 +6,7 @@ package com.mytest.teainfoims.controller;
  * @Date: create in 2021/1/28
  */
 
-import com.mytest.teainfoims.entity.UserEntity;
-import org.apache.commons.lang3.StringUtils;
+import com.mytest.teainfoims.vo.UserEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -18,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;

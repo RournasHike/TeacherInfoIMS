@@ -107,7 +107,7 @@
                                     <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10" data-tab="role/listPage" target="_self"><i class="fa fa-address-book"></i><span class="layui-left-nav"> 角色管理</span></a>
                                 </dd>
                                 </#if>
-                                <#if permissionList?seq_contains("9030")>
+                                <#--<#if permissionList?seq_contains("9030")>
                                 <dd>
                                     <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10" data-tab="module/listPage" target="_self"><i class="fa fa-key"></i><span class="layui-left-nav"> 菜单管理</span></a>
                                 </dd>
@@ -116,7 +116,7 @@
                                     <dd>
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10" data-tab="dict/listPage" target="_self"><i class="fa fa-book"></i><span class="layui-left-nav"> 数据字典管理</span></a>
                                     </dd>
-                                </#if>
+                                </#if>-->
                             </dl>
                         </li>
                     </#if>
@@ -199,11 +199,11 @@
                     <#if permissionList?seq_contains("11000")>
                         <li class="layui-nav-item">
                             <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-flag"></i><span class="layui-left-nav"> 课时管理</span> <span class="layui-nav-more"></span></a><dl class="layui-nav-child">
-                                <#if permissionList?seq_contains("11010")>
+                                <#--<#if permissionList?seq_contains("11010")>
                                     <dd>
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3" data-tab="classHour/apply" target="_self"><i class="fa fa-exchange"></i><span class="layui-left-nav"> 课时申请</span></a>
                                     </dd>
-                                </#if>
+                                </#if>-->
                                 <#if permissionList?seq_contains("11020")>
                                     <dd>
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="classHour/summary" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 课时统计</span></a>
@@ -214,11 +214,11 @@
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="classHour/query" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 课时查询</span></a>
                                     </dd>
                                 </#if>
-                                <#if permissionList?seq_contains("11040")>
+                                <#--<#if permissionList?seq_contains("11040")>
                                     <dd>
                                         <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="classHour/auditList" target="_self"><i class="fa fa-paper-plane"></i><span class="layui-left-nav"> 课时审核列表</span></a>
                                     </dd>
-                                </#if>
+                                </#if>-->
                             </dl>
                         </li>
                     </#if>

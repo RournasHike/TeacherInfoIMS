@@ -27,12 +27,12 @@
         <form class="layui-form">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <select name="classYear" lay-verify="required" id="classYear">
+                    <select name="teachClassYear" lay-verify="required" id="classYear">
                         <option value="" selected="selected">-- 请选择学年 --</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="classTerm" lay-verify="required">
+                    <select name="teachClassTerm" lay-verify="required">
                         <option value="" selected="selected">-- 请选择学期 --</option>
                         <option value="第一学期">第一学期</option>
                         <option value="第二学期">第二学期</option>

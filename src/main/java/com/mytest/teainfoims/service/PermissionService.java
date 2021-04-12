@@ -1,7 +1,6 @@
 package com.mytest.teainfoims.service;
 
 import com.mytest.teainfoims.dao.TPermissionMapper;
-import com.mytest.teainfoims.exceptions.AuthException;
 import com.mytest.teainfoims.service.base.BaseService;
 import com.mytest.teainfoims.utils.AssertUtil;
 import com.mytest.teainfoims.vo.TPermission;

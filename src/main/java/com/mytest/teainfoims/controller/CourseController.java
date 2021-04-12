@@ -52,7 +52,10 @@ public class CourseController extends BaseController {
         return "admin/jiaoxue/course/courseAdd";
     }
 
-
+    @RequestMapping("toCourseIframe")
+    public String toCourseIframe(){
+        return "admin/jiaoxue/teach/courseSelector";
+    }
 
     @RequestMapping("courseList")
     @ResponseBody

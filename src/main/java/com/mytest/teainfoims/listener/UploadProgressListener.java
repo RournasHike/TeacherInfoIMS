@@ -2,7 +2,7 @@ package com.mytest.teainfoims.listener;
 
 
 
-import com.mytest.teainfoims.entity.UserEntity;
+import com.mytest.teainfoims.vo.UserEntity;
 import org.apache.commons.fileupload.ProgressListener;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,6 @@ public class UploadProgressListener implements ProgressListener {
         this.session=session;
         UserEntity userEntity=new UserEntity();
         session.setAttribute("uploadStatus",userEntity);
-
     }
 
     @Override

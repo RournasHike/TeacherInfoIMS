@@ -1,4 +1,4 @@
-package com.mytest.teainfoims.entity;
+package com.mytest.teainfoims.vo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

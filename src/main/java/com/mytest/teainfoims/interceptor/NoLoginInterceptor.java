@@ -1,7 +1,6 @@
 package com.mytest.teainfoims.interceptor;
 
 import com.mytest.teainfoims.dao.TUserMapper;
-import com.mytest.teainfoims.exceptions.AuthException;
 import com.mytest.teainfoims.exceptions.NoLoginException;
 import com.mytest.teainfoims.utils.LoginUserUtil;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -9,7 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 非法访问拦截

@@ -25,8 +25,7 @@ layui.use(['table','layer',"form"],function(){
             {field: 'teachClassYear', title: '授课学年',  align:'center'},
             {field: 'teachClassTerm', title: '授课学期',  align:'center'},
             {field: 'teachGrade', title: '授课年级',  align:'center'},
-            {field: 'teachMajor', title: '授课专业',  align:'center'},
-            {title:'操作',templet:'#teachListBar', fixed: 'right', align:'center', minWidth:150}
+            {field: 'teachMajor', title: '授课专业',  align:'center'}
         ]]
     });
 
@@ -45,9 +44,8 @@ layui.use(['table','layer',"form"],function(){
             where: { //设定异步数据接口的额外参数，任意设
                 // 通过文本框，设置传递的参数
                 // 通过文本框，设置传递的参数
-                teacherName:$("[name='teacherName']").val()
-                ,classYear: $("[name='classYear']").val() // 客户编号
-                ,classTerm:$("[name='classTerm']").val() // 客户级别
+                teachClassYear: $("[name='teachClassYear']").val()
+                ,teachClassTerm:$("[name='teachClassTerm']").val()
             }
             ,page: {
                 curr: 1 // 重新从第 1 页开始

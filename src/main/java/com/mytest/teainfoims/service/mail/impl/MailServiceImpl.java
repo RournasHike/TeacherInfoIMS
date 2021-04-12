@@ -1,6 +1,6 @@
-package com.mytest.teainfoims.mail.impl;
+package com.mytest.teainfoims.service.mail.impl;
 
-import com.mytest.teainfoims.mail.MailService;
+import com.mytest.teainfoims.service.mail.MailService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;

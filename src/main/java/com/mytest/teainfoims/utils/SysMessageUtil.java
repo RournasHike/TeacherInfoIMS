@@ -1,10 +1,6 @@
 package com.mytest.teainfoims.utils;
 
-import com.mytest.teainfoims.entity.SysMailMessage;
-import com.mytest.teainfoims.vo.TTeacher;
-
-import java.io.IOException;
-import java.util.Properties;
+import com.mytest.teainfoims.vo.SysMailMessage;
 
 /**
  * @Author Alex

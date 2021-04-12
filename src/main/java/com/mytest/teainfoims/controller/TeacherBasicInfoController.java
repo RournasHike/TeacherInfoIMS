@@ -2,19 +2,13 @@ package com.mytest.teainfoims.controller;
 
 import com.mytest.teainfoims.common.ResultInfo;
 import com.mytest.teainfoims.controller.base.BaseController;
-import com.mytest.teainfoims.entity.SysMailMessage;
-import com.mytest.teainfoims.mail.MailService;
 import com.mytest.teainfoims.query.TeacherQuery;
 import com.mytest.teainfoims.service.CollegeService;
 import com.mytest.teainfoims.service.DeptService;
 import com.mytest.teainfoims.service.TeacherService;
-import com.mytest.teainfoims.utils.SysMessageUtil;
 import com.mytest.teainfoims.vo.TCollege;
 import com.mytest.teainfoims.vo.TDept;
 import com.mytest.teainfoims.vo.TTeacher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.ResultSet;
 import java.util.Map;
 
 /**
@@ -54,6 +47,17 @@ public class TeacherBasicInfoController extends BaseController {
         model.addAttribute("depts",deptService.selAllDept());
         model.addAttribute("colleges",collegeService.selAllCollege());
         return "admin/tea/teaList";
+    }
+
+
+    @RequestMapping("toBatchDataImport")
+    public String toBatchDataImport(){
+        return "admin/tea/batchDataImport";
+    }
+
+    @RequestMapping("toTeacherIframe")
+    public String toTeacherIframe(){
+        return "admin/jiaoxue/teach/teacherSelector";
     }
 
     /**

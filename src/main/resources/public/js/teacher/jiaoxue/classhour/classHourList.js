@@ -40,9 +40,8 @@ layui.use(['table','layer',"form"],function(){
             // 设置需要传递给后端的参数
             where: { //设定异步数据接口的额外参数，任意设
                 // 通过文本框，设置传递的参数
-                teacherName: $("[name='teacherName']").val() // 客户名称
-                ,collegeId: $("[name='collegeId']").val() // 客户编号
-                ,deptId:$("[name='deptId']").val() // 客户级别
+                classYear: $("[name='classYear']").val()
+                ,classTerm: $("[name='classTerm']").val()
             }
             ,page: {
                 curr: 1 // 重新从第 1 页开始

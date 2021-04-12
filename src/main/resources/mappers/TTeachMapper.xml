@@ -528,15 +528,27 @@
     where tid = #{tid,jdbcType=INTEGER} and cid = #{cid,jdbcType=INTEGER}
   </update>
 
-  <select id="selClassHourList" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="com.mytest.teainfoims.query.base.BaseQuery">
-    select tt.id id,tt.*,tc.* from t_teach tt inner join t_course tc on tt.cid=tc.id
+  <select id="selClassHourList" resultType="com.mytest.teainfoims.vo.ClassHourEntity" parameterType="com.mytest.teainfoims.query.ClassHourQuery">
+    select tt.id id,tt.*,tc.* from t_teach tt inner join t_course tc on tt.cid=tc.id inner join t_teacher ta on ta.tid=tt.tid
+    <where>
+      1=1
+      <if test="teacherName!=null and teacherName!=''">
+        and teacher_name=#{teacherName}
+      </if>
+      <if test="classYear!=null and classYear!=''">
+        and teach_class_year=#{classYear}
+      </if>
+      <if test="classTerm!=null and classTerm!=''">
+        and teach_class_term=#{classTerm}
+      </if>
+    </where>
   </select>
 
-  <select id="selAuditClassHourList" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="com.mytest.teainfoims.query.base.BaseQuery">
+  <select id="selAuditClassHourList" resultType="com.mytest.teainfoims.vo.ClassHourEntity" parameterType="com.mytest.teainfoims.query.base.BaseQuery">
     select tt.id id,tt.*,tc.* from t_teach tt inner join t_course tc on tt.cid=tc.id where audit_state is null
   </select>
 
-  <select id="selClassHourById" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="int">
+  <select id="selClassHourById" resultType="com.mytest.teainfoims.vo.ClassHourEntity" parameterType="int">
     select *,tea.teacher_name teacherName from t_teach tt inner join t_course tc on tt.cid=tc.id inner join t_teacher tea on tea.tid=tt.tid
     <where>
       <if test="id!=null">
@@ -545,7 +557,7 @@
     </where>
   </select>
 
-  <select id="selAuditClassHourById" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="int">
+  <select id="selAuditClassHourById" resultType="com.mytest.teainfoims.vo.ClassHourEntity" parameterType="int">
     select *,tea.teacher_name teacherName from t_teach tt inner join t_course tc on tt.cid=tc.id inner join t_teacher tea on tea.tid=tt.tid
     <where>
       audit_state is null and actual_class_hour is not null
@@ -555,7 +567,7 @@
     </where>
   </select>
 
-  <select id="selTeacherCondClassHour" resultType="com.mytest.teainfoims.entity.ClassHourEntity" parameterType="com.mytest.teainfoims.query.ClassHourQuery">
+  <select id="selTeacherCondClassHour" resultType="com.mytest.teainfoims.vo.ClassHourEntity" parameterType="com.mytest.teainfoims.query.ClassHourQuery">
     select *,tea.teacher_name teacherName from t_teach tt inner join t_course tc on tt.cid=tc.id inner join t_teacher tea on tea.tid=tt.tid
     <where>
       <if test="teacherName!=null and teacherName!=''">

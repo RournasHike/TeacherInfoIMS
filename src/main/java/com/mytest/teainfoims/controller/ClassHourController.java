@@ -2,21 +2,24 @@ package com.mytest.teainfoims.controller;
 
 import com.mytest.teainfoims.common.ResultInfo;
 import com.mytest.teainfoims.controller.base.BaseController;
-import com.mytest.teainfoims.entity.ClassHourEntity;
 import com.mytest.teainfoims.query.ClassHourQuery;
-import com.mytest.teainfoims.query.TeacherQuery;
+import com.mytest.teainfoims.query.TeachQuery;
 import com.mytest.teainfoims.query.base.BaseQuery;
 import com.mytest.teainfoims.service.CourseService;
 import com.mytest.teainfoims.service.TeachService;
 import com.mytest.teainfoims.service.TeacherService;
+import com.mytest.teainfoims.service.UserService;
+import com.mytest.teainfoims.utils.LoginUserUtil;
 import com.mytest.teainfoims.vo.TTeach;
+import com.mytest.teainfoims.vo.TTeacher;
+import com.mytest.teainfoims.vo.TUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -36,6 +39,9 @@ public class ClassHourController extends BaseController {
 
     @Resource
     private TeacherService teacherService;
+
+    @Resource
+    private UserService userService;
 
     @RequestMapping("apply")
     public String applyClassHour(){
@@ -69,7 +75,10 @@ public class ClassHourController extends BaseController {
 
     @RequestMapping("classHourList")
     @ResponseBody
-    public Map<String,Object> queryClassHourList(BaseQuery query){
+    public Map<String,Object> queryClassHourList(ClassHourQuery query, HttpServletRequest request){
+        int userId = LoginUserUtil.releaseUserIdFromCookie(request);
+        TUser tUser = userService.selectByPrimaryKey(userId);
+        query.setTeacherName(tUser.getUsertruename());
         return teachService.queryClassHourList(query);
     }
 
@@ -99,7 +108,6 @@ public class ClassHourController extends BaseController {
         teachService.updateAudit(tTeach);
         return resultInfo;
     }
-
 
     @RequestMapping("teacherClassHourList")
     @ResponseBody

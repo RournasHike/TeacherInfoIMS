@@ -72,6 +72,8 @@ layui.use(['table','layer',"form"],function(){
             // 打开客户订单的对话框（传递选中的数据记录）
             openTeaDialog(checkStatus.data);
 
+        } else if(data.event == "patchDataImport"){
+            openDataImportDialog();
         }
 
     });
@@ -188,6 +190,25 @@ layui.use(['table','layer',"form"],function(){
             area: ['700px', '500px'],
             // url地址
             content: ctx + "/tea/toTeaDetail?teaId=" + data[0].teacherNo,
+            // 可以最大化与最小化
+            maxmin:true
+        });
+
+    }
+
+    function openDataImportDialog() {
+
+
+        // 打开对话框
+        layui.layer.open({
+            // 类型
+            type: 2,
+            // 标题
+            title: "<h3>教师信息管理 - 批量数据导入</h3>",
+            // 宽高
+            area: ['700px', '500px'],
+            // url地址
+            content: ctx + "/tea/toBatchDataImport",
             // 可以最大化与最小化
             maxmin:true
         });

@@ -14,8 +14,62 @@
                 $('#teachClassYear').append(option);
             }
             // $('#teachClassYear').append(option);
+            $('#parentCourseIframe').on('click', function(){
+                var url = ctx + "/course/toCourseIframe";
+                layer.ready(function(){
+                    layer.open({
+                        type: 2,
+                        title: '请选择',
+                        maxmin: true,
+                        area: ['800px', '500px'],
+                        content: url,
+                        end: function(){
+                            // layer.tips('选择成功', '#about', {tips: 1})
+                            layer.msg("选择成功",function(){
 
+                            });
+                        }
+                    });
+                });
+            });
 
+            $('#parentTeachRoomIframe').on('click', function(){
+                var url = ctx + "/teachRoom/toTeachRoomIframe";
+                layer.ready(function(){
+                    layer.open({
+                        type: 2,
+                        title: '请选择',
+                        maxmin: true,
+                        area: ['800px', '500px'],
+                        content: url,
+                        end: function(){
+                            // layer.tips('选择成功', '#about', {tips: 1})
+                            layer.msg("选择成功",function(){
+
+                            });
+                        }
+                    });
+                });
+            });
+
+            $('#parentTeacherIframe').on('click', function(){
+                var url = ctx + "/tea/toTeacherIframe";
+                layer.ready(function(){
+                    layer.open({
+                        type: 2,
+                        title: '请选择',
+                        maxmin: true,
+                        area: ['800px', '500px'],
+                        content: url,
+                        end: function(){
+                            // layer.tips('选择成功', '#about', {tips: 1})
+                            layer.msg("选择成功",function(){
+
+                            });
+                        }
+                    });
+                });
+            });
         });
 
 
@@ -27,24 +81,27 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">课程名称</label>
         <div class="layui-input-block">
-            <select name="courseName" lay-verify="required">
+            <#--<select name="courseName" lay-verify="required">
                 <option value="" selected="selected">--请选择--</option>
                 <#list courses as key>
                     <option value="${key.courseName!""}">${key.courseName!""}</option>
                 </#list>
-            </select>
+
+            </select>-->
+            <a class="layui-btn layui-btn-primary layer-demolist" href="javascript:;" id="parentCourseIframe">点击选择</a>
         </div>
     </div>
 
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">授课教室</label>
         <div class="layui-input-block">
-            <select name="teachRoomName" lay-verify="required">
+            <#--<select name="teachRoomName" lay-verify="required">
                 <option value="" selected="selected">--请选择--</option>
                 <#list teachRooms as key>
                     <option value="${key.teachRoomName!""}">${key.teachRoomName!""}</option>
                 </#list>
-            </select>
+            </select>-->
+            <a class="layui-btn layui-btn-primary layer-demolist" href="javascript:;" id="parentTeachRoomIframe">点击选择</a>
         </div>
     </div>
 
@@ -125,12 +182,13 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">授课老师</label>
         <div class="layui-input-block">
-            <select name="teacherName" lay-verify="required" id="tid">
+            <#--<select name="teacherName" lay-verify="required" id="tid">
                 <option value="" selected="selected">--请选择--</option>
                 <#list teachers as key>
                     <option value="${key.teacherName!''}">${key.teacherName!""}</option>
                 </#list>
-            </select>
+            </select>-->
+            <a class="layui-btn layui-btn-primary layer-demolist" href="javascript:;" id="parentTeacherIframe">点击选择</a>
         </div>
     </div>
 
