@@ -56,7 +56,8 @@ public class TeacherBasicInfoController extends BaseController {
     }
 
     @RequestMapping("toTeacherIframe")
-    public String toTeacherIframe(){
+    public String toTeacherIframe(Model model){
+        model.addAttribute("data",teacherService.getAllTeachers());
         return "admin/jiaoxue/teach/teacherSelector";
     }
 

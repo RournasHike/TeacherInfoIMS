@@ -7,6 +7,8 @@ import com.mytest.teainfoims.query.TeachQuery;
 import com.mytest.teainfoims.query.TeacherQuery;
 import com.mytest.teainfoims.query.base.BaseQuery;
 import com.mytest.teainfoims.service.CourseService;
+import com.mytest.teainfoims.service.TeachRoomService;
+import com.mytest.teainfoims.service.TeacherService;
 import com.mytest.teainfoims.vo.TCourse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +35,12 @@ public class CourseController extends BaseController {
     @Resource
     private CourseService courseService;
 
+    @Resource
+    private TeacherService teacherService;
+
+    @Resource
+    private TeachRoomService teachRoomService;
+
     @RequestMapping("list")
     public String courseList(){
         return "admin/jiaoxue/course/courseList";
@@ -53,7 +61,9 @@ public class CourseController extends BaseController {
     }
 
     @RequestMapping("toCourseIframe")
-    public String toCourseIframe(){
+    public String toCourseIframe(Model model){
+        List<TCourse> allCourse = courseService.getAllCourse();
+        model.addAttribute("data",allCourse);
         return "admin/jiaoxue/teach/courseSelector";
     }
 

@@ -26,7 +26,7 @@
                         end: function(){
                             // layer.tips('选择成功', '#about', {tips: 1})
                             layer.msg("选择成功",function(){
-
+                                $("#courseName").val($("#parentCourseIframe").text());
                             });
                         }
                     });
@@ -45,7 +45,7 @@
                         end: function(){
                             // layer.tips('选择成功', '#about', {tips: 1})
                             layer.msg("选择成功",function(){
-
+                                $("#teachRoomName").val($("#parentTeachRoomIframe").text());
                             });
                         }
                     });
@@ -64,7 +64,7 @@
                         end: function(){
                             // layer.tips('选择成功', '#about', {tips: 1})
                             layer.msg("选择成功",function(){
-
+                                $("#teacherName").val($("#parentTeacherIframe").text());
                             });
                         }
                     });
@@ -89,6 +89,8 @@
 
             </select>-->
             <a class="layui-btn layui-btn-primary layer-demolist" href="javascript:;" id="parentCourseIframe">点击选择</a>
+            <input type="hidden" id="courseName" name="courseName" value="" />
+
         </div>
     </div>
 
@@ -102,6 +104,7 @@
                 </#list>
             </select>-->
             <a class="layui-btn layui-btn-primary layer-demolist" href="javascript:;" id="parentTeachRoomIframe">点击选择</a>
+            <input type="hidden" id="teachRoomName" name="teachRoomName" value="" />
         </div>
     </div>
 
@@ -189,6 +192,7 @@
                 </#list>
             </select>-->
             <a class="layui-btn layui-btn-primary layer-demolist" href="javascript:;" id="parentTeacherIframe">点击选择</a>
+            <input type="hidden" id="teacherName" name="teacherName" value="" />
         </div>
     </div>
 
